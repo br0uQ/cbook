@@ -3,10 +3,16 @@ from model import recipe_parser as rp
 
 class CbModel:
     mypath = "./data/test-recipes/"
+    recipes = []
 
     def load_recipes(self):
-        recipes = rp.get_recipes(self.mypath)
+        self.recipes = rp.get_recipes(self.mypath)
 
-        for r in recipes:
-            print(r)
-            recipe_dict = rp.read_recipe(r)
+
+    def get_recipes(self):
+        return self.recipes
+
+
+    def get_name(self, recipe):
+        recipe_dict = rp.read_recipe(recipe)
+        return rp.get_name(recipe_dict)

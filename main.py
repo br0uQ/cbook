@@ -1,4 +1,5 @@
 #!/bin/env python3
+from view.main_window import MainWindow
 import model.cb_model as model
 from model import cb_model
 from controller import mw_controller as mwc
@@ -12,7 +13,7 @@ from PyQt5 import uic
 app = QApplication(sys.argv)
 
 m_model = cb_model.CbModel()
-window = uic.loadUi("view/main_window.ui")
+window = MainWindow()
 
 m_mwc = mwc.MwController(m_model, window)
 
