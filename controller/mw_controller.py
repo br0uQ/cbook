@@ -12,6 +12,7 @@ class MwController():
 
         self.model.load_recipes()
         self.read_recipes()
+        self.window.backButton.clicked.connect(self.open_recipe_list)
 
 
     def read_recipes(self):
@@ -38,4 +39,9 @@ class MwController():
 
 
     def open_recipe(self, recipe):
+        self.window.stackedWidget.setCurrentIndex(1)
         print(recipe)
+
+
+    def open_recipe_list(self):
+        self.window.stackedWidget.setCurrentIndex(0)
