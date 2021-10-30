@@ -33,6 +33,12 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <widget class="QScrollArea" name="scrollArea">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
@@ -42,123 +48,68 @@
                 <x>0</x>
                 <y>0</y>
                 <width>216</width>
-                <height>647</height>
+                <height>1303</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <item>
                 <widget class="QGroupBox" name="kategorieGroupBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="title">
                   <string>Kategorie</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_2">
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_2">
-                    <property name="text">
-                     <string>Suppe</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_3">
-                    <property name="text">
-                     <string>Nachspeise</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_4">
-                    <property name="text">
-                     <string>Beilage</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="checkBox">
-                    <property name="text">
-                     <string>Hauptspeise</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <layout class="QVBoxLayout" name="verticalLayout_2"/>
                 </widget>
                </item>
                <item>
                 <widget class="QGroupBox" name="nahrungGroupBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="title">
                   <string>Nahrungstyp</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_3">
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_6">
-                    <property name="text">
-                     <string>Fleisch</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_7">
-                    <property name="text">
-                     <string>Fisch</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_5">
-                    <property name="text">
-                     <string>Vegetarisch</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <layout class="QVBoxLayout" name="verticalLayout_3"/>
                 </widget>
                </item>
                <item>
                 <widget class="QGroupBox" name="kohlehydrateGroupBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="title">
                   <string>Kohlenhydrate</string>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_4">
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_9">
-                    <property name="text">
-                     <string>Kartoffel</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_10">
-                    <property name="text">
-                     <string>Reis</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="checkBox_8">
-                    <property name="text">
-                     <string>Mehl</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <layout class="QVBoxLayout" name="verticalLayout_4"/>
                 </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </widget>
             </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </widget>
