@@ -1,4 +1,5 @@
 from PyQt5 import uic
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLabel, QMainWindow
 
 
@@ -10,3 +11,10 @@ class MainWindow(QMainWindow):
 
     def add_recipe(self, recipe_button):
         self.recipeList.layout().addWidget(recipe_button)
+
+
+    def set_image(self, image_path):
+        pixmap = QPixmap(image_path)
+        self.imageLabel.setPixmap(pixmap)
+
+        self.imageLabel.resize(pixmap.width(),pixmap.height())
