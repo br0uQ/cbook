@@ -32,10 +32,17 @@ class MwController:
     def read_recipes(self):
         recipes = self.model.get_recipes()
         self.categories = []
+        self.nahrung = []
+        self.kohlehydrate = []
         for r in recipes:
             rd = self.model.get_recipe_dict(r)
-            #kategorien = self.model.get_kategorien(rd)
+            self.categories = self.categories + self.model.get_kategorien(rd)
+            self.nahrung = self.nahrung + self.model.get_nahrung(rd)
+            self.kohlehydrate = self.kohlehydrate + self.model.get_kohlehydrat(rd)
             self.window.add_recipe(self.create_recipe_button(r, rd))
+        print(self.categories)
+        print(self.nahrung)
+        print(self.kohlehydrate)
         self.window.recipeList.layout().addStretch()
 
 
