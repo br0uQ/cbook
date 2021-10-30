@@ -21,9 +21,7 @@ class MwController():
         for r in recipes:
             rd = self.model.get_recipe_dict(r)
             name = self.model.get_name(rd)
-            print(name)
             image_path = self.get_image_path(r)
-            print(image_path)
             recipe_button = rb.RecipeButton()
             recipe_button.set_name(name)
             recipe_button.set_image(image_path)
@@ -59,12 +57,11 @@ class MwController():
         return instruction_text
 
 
-    def set_ingredients(self, ingredients):
+    def get_ingredients(self, ingredients):
         amount = ""
         unit = ""
         ingredient = ""
         for i in ingredients:
-            print(i)
             if len(i.split(';')) >= 3:
                 amount = amount + i.split(';')[0] + "\n"
                 unit = unit + i.split(';')[1] + "\n"
@@ -72,13 +69,19 @@ class MwController():
             elif len(i.split()) >= 3:
                 amount = amount + i.split()[0] + "\n"
                 unit = unit + i.split()[1] + "\n"
-                ingredient = ingredient + i.split()[2] + "\n"
-        print(amount)
-        self.window.mengeLabel.setText(amount)
-        print(unit)
-        self.window.einheitLabel.setText(unit)
-        print(ingredient)
-        self.window.zutatLabel.setText(ingredient)
+                ing = ""
+                for e in i.split()[2:]:
+                    ing = ing + e + " "
+                ingredient = ingredient + ing + "\n"
+        amount = amount.replace(",", ".")
+        return [amount, unit, ingredient]
+
+
+    def set_ingredients(self, ingredients):
+        ings = self.get_ingredients(ingredients)
+        self.window.mengeLabel.setText(ings[0])
+        self.window.einheitLabel.setText(ings[1])
+        self.window.zutatLabel.setText(ings[2])
 
 
     def open_recipe(self, recipe):
@@ -102,6 +105,8 @@ class MwController():
         self.window.kohlenhydrateLabel.setText(self.get_label_string(kh))
         self.set_ingredients(self.model.get_ingredients(recipe_dict))
 
+        self.window.portionenSpinBox.valueChanged.connect(lambda: self.change_servings(recipe_dict))
+
         # open recipe view
         self.window.stackedWidget.setCurrentIndex(1)
         print(recipe)
@@ -109,3 +114,18 @@ class MwController():
 
     def open_recipe_list(self):
         self.window.stackedWidget.setCurrentIndex(0)
+
+
+    def change_servings(self, recipe_dict):
+        default_servings = self.model.get_servings(recipe_dict)
+        new_servings = self.window.portionenSpinBox.value()
+        ings = self.get_ingredients(self.model.get_ingredients(recipe_dict))
+        amounts = ings[0].split('\n')
+        new_amounts = ""
+        for a in amounts:
+            if a != '':
+
+                convert = "%g" % (float(a) * new_servings / default_servings)
+                new_amounts = new_amounts + convert + "\n"
+        self.window.mengeLabel.setText(new_amounts)
+        
