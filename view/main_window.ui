@@ -47,7 +47,7 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <item>
-                <widget class="QGroupBox" name="groupBox">
+                <widget class="QGroupBox" name="kategorieGroupBox">
                  <property name="title">
                   <string>Kategorie</string>
                  </property>
@@ -84,7 +84,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="groupBox_2">
+                <widget class="QGroupBox" name="nahrungGroupBox">
                  <property name="title">
                   <string>Nahrungstyp</string>
                  </property>
@@ -114,7 +114,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="groupBox_3">
+                <widget class="QGroupBox" name="kohlehydrateGroupBox">
                  <property name="title">
                   <string>Kohlenhydrate</string>
                  </property>

@@ -40,7 +40,7 @@ class CbModel:
 
 
     def get_kategorien(self, recipe):
-        return self.get_label_list(recipe, 'k_')
+        return self.get_label_list(recipe, 'Ti')
 
 
     def get_nahrung(self, recipe):
