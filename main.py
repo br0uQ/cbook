@@ -9,13 +9,17 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import uic
 
+def main():
+    app = QApplication(sys.argv)
 
-app = QApplication(sys.argv)
+    m_model = cb_model.CbModel()
+    window = MainWindow()
 
-m_model = cb_model.CbModel()
-window = MainWindow()
+    m_mwc = mwc.MwController(m_model, window)
 
-m_mwc = mwc.MwController(m_model, window)
+    window.show()
+    app.exec()
 
-window.show()
-app.exec()
+
+if __name__ == '__main__':
+    main()
