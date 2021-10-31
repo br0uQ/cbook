@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QLabel, QMainWindow
 
 class MainWindow(QMainWindow):
     recipe_buttons = []
+
+
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi("view/main_window.ui", self)

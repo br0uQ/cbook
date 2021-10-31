@@ -39,7 +39,6 @@ class RvController:
 
         # open recipe view
         self.window.stackedWidget.setCurrentIndex(1)
-        print(recipe)
 
 
     def get_instructions_string(self, instructions):
@@ -52,7 +51,8 @@ class RvController:
     def get_label_string(self, labels):
         ret = ""
         for l in labels:
-            ret = ret + l + ", "
+            ret = ret + l.split('_')[1] + ", "
+        ret = ret[:-2]
         return ret
 
 

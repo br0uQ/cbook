@@ -4,6 +4,10 @@ from model import recipe_parser as rp
 class CbModel:
     mypath = "./data/test-recipes/"
     recipes = []
+    label_no_c = "k_Keine Kategorie"
+    label_no_n = "n_Kein Nahrungstyp"
+    label_no_kh = "kh_Keine Kohlenhydrate"
+
 
     def load_recipes(self):
         self.recipes = rp.get_recipes(self.mypath)
@@ -34,21 +38,29 @@ class CbModel:
         ret = []
         for k in keywords:
             if len(k) > len(label) and k[0:len(label)] == label:
-                print("Keyword rightig: " + k)
                 ret.append(k)
         return ret
 
 
     def get_kategorien(self, recipe):
-        return self.get_label_list(recipe, 'k_')
+        ret = self.get_label_list(recipe, 'k_')
+        if len(ret) <= 0:
+            ret.append(self.label_no_c)
+        return ret
 
 
     def get_nahrung(self, recipe):
-        return self.get_label_list(recipe, 'n_')
+        ret = self.get_label_list(recipe, 'n_')
+        if len(ret) <= 0:
+            ret.append(self.label_no_n)
+        return ret
 
 
     def get_kohlehydrat(self, recipe):
-        return self.get_label_list(recipe, 'kh_')
+        ret = self.get_label_list(recipe, 'kh_')
+        if len(ret) <= 0:
+            ret.append(self.label_no_kh)
+        return ret
 
 
     def get_ingredients(self, recipe):

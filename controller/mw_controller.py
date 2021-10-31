@@ -48,60 +48,60 @@ class MwController:
         self.nahrung = sorted(set(self.nahrung))
         self.kohlehydrate = sorted(set(self.kohlehydrate))
         self.label_filter = self.categories + self.nahrung + self.kohlehydrate
-        print(self.categories)
-        print(self.nahrung)
-        print(self.kohlehydrate)
         self.window.recipeList.layout().addStretch()
 
 
+    def show_button(self, recipe_dict):
+        show = False
+        for c in self.model.get_kategorien(recipe_dict):
+            if c in self.label_filter:
+                show = True
+        if show:
+            show = False
+            for n in self.model.get_nahrung(recipe_dict):
+                if n in self.label_filter:
+                    show = True
+        if show:
+            show = False
+            for kh in self.model.get_kohlehydrat(recipe_dict):
+                if kh in self.label_filter:
+                    show = True
+        return show
+
+
     def reload_recipes(self):
-        for r in self.recipes:
-            rd = self.model.get_recipe_dict(r)
-            labels = self.model.get_kategorien(rd) + self.model.get_nahrung(rd) + self.model.get_kohlehydrat(rd)
-            for l in labels:
-                if l in self.label_filter:
-                    for b in self.window.get_recipe_buttons():
-                        print(b.text())
+        buttons = self.window.get_recipe_buttons()
+        for b in buttons:
+            rd = self.model.get_recipe_dict(b.recipe)
+            b.setHidden(not self.show_button(rd))
 
 
     def filter_label(self, state, label):
         if QtCore.Qt.Checked == state:
-            print("Checked")
-            print(self.label_filter)
             if label not in self.label_filter:
                 self.label_filter.append(label)
-            print(self.label_filter)
         else:
-            print("Unchecked")
-            print(self.label_filter)
             if label in self.label_filter:
                 self.label_filter.remove(label)
-            print(self.label_filter)
         self.reload_recipes()
+
+
+    def create_checkbox(self, label):
+        cb = QCheckBox(label.split('_')[1])
+        cb.categorie = label
+        if label in self.label_filter:
+            cb.setChecked(True)
+        cb.stateChanged.connect(lambda s, l=label: self.filter_label(s, l))
+        return cb
 
 
     def create_checkboxes(self):
         for c in self.categories:
-            cb = QCheckBox(c.split('_')[1])
-            cb.categorie = c
-            if c in self.label_filter:
-                cb.setChecked(True)
-            cb.stateChanged.connect(lambda s, l=c: self.filter_label(s, l))
-            self.window.kategorieGroupBox.layout().addWidget(cb)
+            self.window.kategorieGroupBox.layout().addWidget(self.create_checkbox(c))
         for n in self.nahrung:
-            cb = QCheckBox(n.split('_')[1])
-            cb.nahrung = n
-            if n in self.label_filter:
-                cb.setChecked(True)
-            cb.stateChanged.connect(lambda s, l=n: self.filter_label(s, l))
-            self.window.nahrungGroupBox.layout().addWidget(cb)
+            self.window.nahrungGroupBox.layout().addWidget(self.create_checkbox(n))
         for k in self.kohlehydrate:
-            cb = QCheckBox(k.split('_')[1])
-            cb.kohlehydrat = k
-            if k in self.label_filter:
-                cb.setChecked(True)
-            cb.stateChanged.connect(lambda s, l=k: self.filter_label(s, l))
-            self.window.kohlehydrateGroupBox.layout().addWidget(cb)
+            self.window.kohlehydrateGroupBox.layout().addWidget(self.create_checkbox(k))
 
 
     def get_image_path(self, recipe_path):
