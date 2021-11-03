@@ -1,25 +1,31 @@
+from controller.re_controller import ReController
+from controller.rc_controller import RvController
+from view import recipe_button as rb
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QCheckBox, QVBoxLayout
-from controller.rc_controller import RvController
-from os.path import split
-from view import recipe_button as rb
 import os
+from os.path import split
 
 
 
 class MwController:
     label_filter = []
-    
+    categories = []
+    nahrung = []
+    kohlehydrate = []
     
     def __init__(self, model, window):
         self.model = model
         self.window = window
         self.rv_controller = RvController(model, window)
+        self.re_controller = ReController(model, window)
 
         self.model.load_recipes()
         self.read_recipes()
         self.create_checkboxes()
         self.window.backButton.clicked.connect(self.open_recipe_list)
+        self.window.buttonCancel.clicked.connect(self.open_recipe_list)
+        self.window.buttonNeuesRezept.clicked.connect(self.create_new_recipe)
 
 
     def create_recipe_button(self, recipe, recipe_dict):
@@ -114,3 +120,8 @@ class MwController:
 
     def open_recipe_list(self):
         self.window.stackedWidget.setCurrentIndex(0)
+
+
+    def create_new_recipe(self):
+        self.re_controller.prepare_new(self.categories, self.nahrung, self.kohlehydrate)
+        self.window.stackedWidget.setCurrentIndex(2)
