@@ -27,7 +27,7 @@ class RecipeButton(QToolButton):
 
 
     def set_name(self, name):
-        self.setText(name)
+        self.setText("  " + name)
 
 
     def set_image(self, image_path):
