@@ -1,5 +1,5 @@
 from os import listdir
-import os
+import os, shutil
 from os.path import isdir, lexists
 import json
 from PIL import Image
@@ -93,3 +93,7 @@ def write_recipe(recipe_path, recipe_dict, image):
     f.write(data)
     if image:
         save_image(image, folder)
+
+
+def delete_recipe(recipe):
+    shutil.rmtree(os.path.dirname(recipe))

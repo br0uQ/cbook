@@ -85,3 +85,7 @@ class CbModel:
         rd = rp.create_recipe_dict(name, ingredients, servings, description,
                 instructions, categories, nahrung, kohlenhydrate)
         rp.write_recipe(self.mypath, rd, image)
+
+
+    def delete_recipe(self, recipe):
+        rp.delete_recipe(recipe)

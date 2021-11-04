@@ -3,7 +3,7 @@ from controller.re_controller import ReController
 from controller.rc_controller import RvController
 from view import recipe_button as rb
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QCheckBox, QVBoxLayout
+from PyQt5.QtWidgets import QCheckBox, QDialogButtonBox, QMessageBox, QVBoxLayout
 import os
 from os.path import split
 
@@ -28,6 +28,8 @@ class MwController:
         self.window.buttonCancel.clicked.connect(self.open_recipe_list)
         self.window.buttonNeuesRezept.clicked.connect(self.create_new_recipe)
         self.window.buttonSave.clicked.connect(self.save_recipe)
+        self.window.editButton.clicked.connect(self.edit_recipe)
+        self.window.toolButtonDelete.clicked.connect(self.open_confirmation_dialog)
 
 
     def load_recipes(self):
@@ -129,7 +131,33 @@ class MwController:
 
 
     def open_recipe(self, recipe):
+        self.recipe = recipe
         self.rv_controller.load_recipe(recipe)
+
+
+    def open_confirmation_dialog(self):
+        dlg = QMessageBox(self.window)
+        dlg.setWindowTitle("Rezept löschen?")
+        dlg.setText("Soll das Rezept wirklich gelöscht werden?")
+        dlg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        dlg.setIcon(QMessageBox.Question)
+        button = dlg.exec_()
+
+        if button == QMessageBox.Yes:
+            self.delete_recipe()
+        
+
+    def delete_recipe(self):
+        self.model.delete_recipe(self.recipe)
+        self.window.delete_recipe_buttons()
+        self.window.stackedWidget.setCurrentIndex(0)
+        self.load_recipes()
+
+
+    def edit_recipe(self):
+        self.re_controller.prepare_edit(self.recipe, self.categories,
+                self.nahrung, self.kohlehydrate)
+        self.window.stackedWidget.setCurrentIndex(2)
 
 
     def open_recipe_list(self):

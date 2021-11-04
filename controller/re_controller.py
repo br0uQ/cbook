@@ -1,4 +1,6 @@
+import os
 from model import helper
+from model import recipe_parser
 from model.recipe_parser import get_ingredients
 from os.path import split
 from PyQt5 import QtWidgets
@@ -8,6 +10,7 @@ from PyQt5.QtGui import QPixmap
 class ReController:
     default_image = "view/knife_and_fork.svg"
     image = ""
+    edit = False
 
 
     def __init__(self, model, window):
@@ -24,6 +27,11 @@ class ReController:
         self.window.buttonClearKategorien.clicked.connect(self.clear_categories)
         self.window.buttonClearNahrung.clicked.connect(self.clear_nahrung)
         self.window.buttonClearKohlenhydrate.clicked.connect(self.clear_kohlenhydrate)
+        self.window.buttonReload.clicked.connect(self.reload)
+
+
+    def reload(self):
+        self.fill_data(self.recipe)
 
 
     def set_image(self, image_path):
@@ -38,26 +46,84 @@ class ReController:
         return ret
 
 
-    def prepare_new(self, categories, nahrungs, kohlehydrate):
+    def prepare_labels(self, categories, nahrungs, kohlehydrate):
         categories = self.remove_prefix(categories)
         nahrungs = self.remove_prefix(nahrungs)
         kohlehydrate = self.remove_prefix(kohlehydrate)
-        self.window.nameLineEdit.setText("")
-        self.window.zutatenTableWidget.setRowCount(1)
-        self.window.zutatenTableWidget.clearContents()
-        self.set_image(self.default_image)
-        self.window.spinBoxPortionenEdit.setValue(4)
         self.window.comboBoxKategorien.clear()
         self.window.comboBoxKategorien.addItems(categories)
         self.window.comboBoxNahrung.clear()
         self.window.comboBoxNahrung.addItems(nahrungs)
         self.window.comboBoxKohlenhydrate.clear()
         self.window.comboBoxKohlenhydrate.addItems(kohlehydrate)
+
+
+    def prepare_new(self, categories, nahrungs, kohlehydrate):
+        self.edit = False
+        self.prepare_labels(categories, nahrungs, kohlehydrate)
+        self.window.nameLineEdit.setText("")
+        self.window.zutatenTableWidget.setRowCount(1)
+        self.window.zutatenTableWidget.clearContents()
+        self.set_image(self.default_image)
+        self.window.spinBoxPortionenEdit.setValue(4)
+        self.window.buttonReload.setHidden(True)
         self.clear_categories()
         self.clear_kohlenhydrate()
         self.clear_nahrung()
-        self.window.buttonReload.setHidden(True)
-        self.window.buttonDeleteRecipe.setHidden(True)
+        self.window.textEditAnleitung.setText("")
+        self.window.textEditBeschreibung.setText("")
+
+
+    def fill_ingredients_table(self, ingredients):
+        tableWidget = self.window.zutatenTableWidget
+        tableWidget.setRowCount(len(ingredients))
+        index = 0
+        for i in ingredients:
+            if len(i.split(';')) >= 3:
+                item = QtWidgets.QTableWidgetItem(i.split(';')[0])
+                tableWidget.setItem(index, 0, item)
+                item = QtWidgets.QTableWidgetItem(i.split(';')[1])
+                tableWidget.setItem(index, 1, item)
+                item = QtWidgets.QTableWidgetItem(i.split(';')[2])
+                tableWidget.setItem(index, 2, item)
+            elif len(i.split(' ')) >= 3:
+                item = QtWidgets.QTableWidgetItem(i.split(' ')[0])
+                tableWidget.setItem(index, 0, item)
+                item = QtWidgets.QTableWidgetItem(i.split(' ')[1])
+                tableWidget.setItem(index, 1, item)
+                ing = ""
+                for e in i.split(' ')[2:]:
+                    ing = ing + e + " "
+                item = QtWidgets.QTableWidgetItem(ing[:-1])
+                tableWidget.setItem(index, 2, item)
+            index = index + 1
+
+
+    def fill_data(self, recipe):
+        rd = self.model.get_recipe_dict(recipe)
+        self.window.nameLineEdit.setText(self.model.get_name(rd))
+        self.set_image(os.path.dirname(recipe) + "/full.jpg")
+        self.window.spinBoxPortionenEdit.setValue(self.model.get_servings(rd))
+        instructions = self.model.get_instructions(rd)
+        text = ""
+        for i in instructions:
+            text = text + i + "\n\n"
+        self.window.textEditAnleitung.setText(text)
+        self.window.textEditBeschreibung.setText(self.model.get_description(rd))
+        k = self.model.get_kategorien(rd)
+        n = self.model.get_nahrung(rd)
+        kh = self.model.get_kohlehydrat(rd)
+        self.window.labelKategorienEdit.setText(helper.get_label_string(k))
+        self.window.labelNahrungEdit.setText(helper.get_label_string(n))
+        self.window.labelKohlenhydrateEdit.setText(helper.get_label_string(kh))
+        self.fill_ingredients_table(self.model.get_ingredients(rd))
+
+
+    def prepare_edit(self, recipe, categories, nahrungs, kohlehydrate):
+        self.edit = True
+        self.recipe = recipe
+        self.prepare_labels(categories, nahrungs, kohlehydrate)
+        self.fill_data(recipe)
 
 
     def add_ingredient_row(self):
@@ -95,7 +161,6 @@ class ReController:
             self.window.labelKategorienEdit.setText(text + selected)
             # clear comboBox
             self.window.comboBoxKategorien.clearEditText()
-        print(selected)
 
 
     def activated_nahrung(self):
@@ -108,7 +173,6 @@ class ReController:
             self.window.labelNahrungEdit.setText(text + selected)
             # clear comboBox
             self.window.comboBoxNahrung.clearEditText()
-        print(selected)
 
 
     def activated_kohlenhydrate(self):
@@ -121,7 +185,6 @@ class ReController:
             self.window.labelKohlenhydrateEdit.setText(text + selected)
             # clear comboBox
             self.window.comboBoxKohlenhydrate.clearEditText()
-        print(selected)
 
 
     def clear_categories(self):
@@ -150,7 +213,7 @@ class ReController:
                         menge = helper.string_to_float(menge)
                     except:
                         QtWidgets.QMessageBox.critical(self.window, "Ungültige Mengenangabe",
-                                "Ungültige Mengeneingabe '" + menge + "'.\n" +
+                                "Ungültige Mengeneingabe '" + str(menge) + "'.\n" +
                                 "Entweder als Dezimalzahl (z.B. '1.5')\n" +
                                 "oder als Bruch (z.B. '1 1/2' oder '3/5') eingeben!")
                         return None
@@ -174,7 +237,7 @@ class ReController:
 
     def save_recipe(self):
         name = self.window.nameLineEdit.text()
-        if self.model.check_name(name):
+        if self.edit or self.model.check_name(name):
             ingredients = self.get_ingredients()
             if ingredients:
                 # read recipe data and save recipe
@@ -185,20 +248,14 @@ class ReController:
                 nahrung = self.window.labelNahrungEdit.text().split(', ')
                 kohlenhydrate = self.window.labelKohlenhydrateEdit.text().split(', ')
                 
-                print("====== Recipe Data ======")
-                print(name)
-                print(self.image)
-                print(ingredients)
-                print(portionen)
-                print(beschreibung)
-                print(anleitung)
-                print(kategorien)
-                print(nahrung)
-                print(kohlenhydrate)
-                print("====== Recipe Data end ======")
-
                 self.model.save_recipe(name, self.image, ingredients, portionen,
                         beschreibung, anleitung, kategorien, nahrung, kohlenhydrate)
+
+                # prevent having two folders with the same recipe
+                if self.edit:
+                    rd = self.model.get_recipe_dict(self.recipe)
+                    if name != self.model.get_name(rd):
+                        self.model.delete_recipe(self.recipe)
 
             return True
         else:

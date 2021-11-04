@@ -1,3 +1,4 @@
+from model import helper
 import os
 
 
@@ -9,13 +10,13 @@ class RvController:
         self.window = window
 
 
-
     def get_fullimage_path(self, recipe_path):
         return os.path.dirname(recipe_path) + "/full.jpg"
 
 
     def load_recipe(self, recipe):
         # fill recipe data
+        self.recipe = recipe
         recipe_dict = self.model.get_recipe_dict(recipe)
         self.window.nameLabel.setText(self.model.get_name(recipe_dict))
         self.window.set_image(self.get_fullimage_path(recipe))
@@ -27,13 +28,13 @@ class RvController:
 
         # kategorien
         k = self.model.get_kategorien(recipe_dict)
-        self.window.kategorieLabel.setText(self.get_label_string(k))
+        self.window.kategorieLabel.setText(helper.get_label_string(k))
 
         n = self.model.get_nahrung(recipe_dict)
-        self.window.nahrungstypLabel.setText(self.get_label_string(n))
+        self.window.nahrungstypLabel.setText(helper.get_label_string(n))
 
         kh = self.model.get_kohlehydrat(recipe_dict)
-        self.window.kohlenhydrateLabel.setText(self.get_label_string(kh))
+        self.window.kohlenhydrateLabel.setText(helper.get_label_string(kh))
         self.set_ingredients(self.model.get_ingredients(recipe_dict))
 
         self.window.portionenSpinBox.valueChanged.connect(lambda: self.change_servings(recipe_dict))
@@ -47,14 +48,6 @@ class RvController:
         for i in instructions:
             instruction_text = instruction_text + i + "\n\n\n"
         return instruction_text
-
-
-    def get_label_string(self, labels):
-        ret = ""
-        for l in labels:
-            ret = ret + l.split('_')[1] + ", "
-        ret = ret[:-2]
-        return ret
 
 
     def set_ingredients(self, ingredients):
@@ -96,5 +89,3 @@ class RvController:
                 ingredient = ingredient + ing + "\n"
         amount = amount.replace(",", ".")
         return [amount, unit, ingredient]
-
-
