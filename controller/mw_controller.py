@@ -1,3 +1,4 @@
+from model import helper
 from controller.re_controller import ReController
 from controller.rc_controller import RvController
 from view import recipe_button as rb
@@ -20,12 +21,19 @@ class MwController:
         self.rv_controller = RvController(model, window)
         self.re_controller = ReController(model, window)
 
-        self.model.load_recipes()
-        self.read_recipes()
-        self.create_checkboxes()
+        self.window.recipeList.layout().addStretch()
+        self.load_recipes()
+
         self.window.backButton.clicked.connect(self.open_recipe_list)
         self.window.buttonCancel.clicked.connect(self.open_recipe_list)
         self.window.buttonNeuesRezept.clicked.connect(self.create_new_recipe)
+        self.window.buttonSave.clicked.connect(self.save_recipe)
+
+
+    def load_recipes(self):
+        self.model.load_recipes()
+        self.read_recipes()
+        self.create_checkboxes()
 
 
     def create_recipe_button(self, recipe, recipe_dict):
@@ -54,7 +62,6 @@ class MwController:
         self.nahrung = sorted(set(self.nahrung))
         self.kohlehydrate = sorted(set(self.kohlehydrate))
         self.label_filter = self.categories + self.nahrung + self.kohlehydrate
-        self.window.recipeList.layout().addStretch()
 
 
     def show_button(self, recipe_dict):
@@ -75,7 +82,7 @@ class MwController:
         return show
 
 
-    def reload_recipes(self):
+    def filter_recipes(self):
         buttons = self.window.get_recipe_buttons()
         for b in buttons:
             rd = self.model.get_recipe_dict(b.recipe)
@@ -89,7 +96,7 @@ class MwController:
         else:
             if label in self.label_filter:
                 self.label_filter.remove(label)
-        self.reload_recipes()
+        self.filter_recipes()
 
 
     def create_checkbox(self, label):
@@ -101,7 +108,14 @@ class MwController:
         return cb
 
 
+    def clear_checkboxes(self):
+        helper.clear_layout(self.window.kategorieGroupBox.layout())
+        helper.clear_layout(self.window.nahrungGroupBox.layout())
+        helper.clear_layout(self.window.kohlehydrateGroupBox.layout())
+
+
     def create_checkboxes(self):
+        self.clear_checkboxes()
         for c in self.categories:
             self.window.kategorieGroupBox.layout().addWidget(self.create_checkbox(c))
         for n in self.nahrung:
@@ -125,3 +139,10 @@ class MwController:
     def create_new_recipe(self):
         self.re_controller.prepare_new(self.categories, self.nahrung, self.kohlehydrate)
         self.window.stackedWidget.setCurrentIndex(2)
+
+
+    def save_recipe(self):
+        if self.re_controller.save_recipe():
+            self.window.delete_recipe_buttons()
+            self.window.stackedWidget.setCurrentIndex(0)
+            self.load_recipes()

@@ -91,4 +91,5 @@ def write_recipe(recipe_path, recipe_dict, image):
     filepath = folder + "/recipe.json"
     f = open(filepath, "w")
     f.write(data)
-    save_image(image, folder)
+    if image:
+        save_image(image, folder)

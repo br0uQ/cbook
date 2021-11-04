@@ -24,7 +24,6 @@ class ReController:
         self.window.buttonClearKategorien.clicked.connect(self.clear_categories)
         self.window.buttonClearNahrung.clicked.connect(self.clear_nahrung)
         self.window.buttonClearKohlenhydrate.clicked.connect(self.clear_kohlenhydrate)
-        self.window.buttonSave.clicked.connect(self.save_recipe)
 
 
     def set_image(self, image_path):
@@ -201,7 +200,9 @@ class ReController:
                 self.model.save_recipe(name, self.image, ingredients, portionen,
                         beschreibung, anleitung, kategorien, nahrung, kohlenhydrate)
 
+            return True
         else:
             QtWidgets.QMessageBox.critical(self.window, "Ungültiger Rezeptname",
                     "Ein Rezept mit diesem Namen ist bereits vorhanden.\n" +
                     "Bitte wähle einen anderen Namen!")
+            return False
