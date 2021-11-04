@@ -67,6 +67,10 @@ class CbModel:
         return rp.get_ingredients(recipe)
 
 
+    def get_description(self, recipe):
+        return rp.get_description(recipe)
+
+
     def check_name(self, name):
         for r in self.get_recipes():
             rd = self.get_recipe_dict(r)

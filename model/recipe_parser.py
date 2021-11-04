@@ -38,6 +38,10 @@ def get_ingredients(recipe):
     return recipe['recipeIngredient']
 
 
+def get_description(recipe):
+    return recipe['description']
+
+
 def get_instructions(recipe):
     return recipe['recipeInstructions']
 

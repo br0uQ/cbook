@@ -22,6 +22,7 @@ class RvController:
 
         instructions = self.model.get_instructions(recipe_dict)
         self.window.anleitungLabel.setText(self.get_instructions_string(instructions))
+        self.window.beschreibungLabel.setText(self.model.get_description(recipe_dict))
         self.window.portionenSpinBox.setValue(self.model.get_servings(recipe_dict))
 
         # kategorien
