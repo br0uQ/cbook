@@ -75,6 +75,6 @@ class CbModel:
         return True
 
 
-    def save_recipe(self, name, image, ingredients, servings, instructions,
-            categories, nahrung, kohlenhydrate):
+    def save_recipe(self, name, image, ingredients, servings, description,
+            instructions, categories, nahrung, kohlenhydrate):
         print("Todo")

@@ -181,6 +181,7 @@ class ReController:
                 # read recipe data and save recipe
                 portionen = self.window.spinBoxPortionenEdit.value()
                 anleitung = self.window.textEditAnleitung.toPlainText()
+                beschreibung = self.window.textEditBeschreibung.toPlainText()
                 kategorien = self.window.labelKategorienEdit.text().split(', ')
                 nahrung = self.window.labelNahrungEdit.text().split(', ')
                 kohlenhydrate = self.window.labelKohlenhydrateEdit.text().split(', ')
@@ -190,6 +191,7 @@ class ReController:
                 print(self.image)
                 print(ingredients)
                 print(portionen)
+                print(beschreibung)
                 print(anleitung)
                 print(kategorien)
                 print(nahrung)
@@ -197,7 +199,7 @@ class ReController:
                 print("====== Recipe Data end ======")
 
                 self.model.save_recipe(name, self.image, ingredients, portionen,
-                        anleitung, kategorien, nahrung, kohlenhydrate)
+                        beschreibung, anleitung, kategorien, nahrung, kohlenhydrate)
 
         else:
             QtWidgets.QMessageBox.critical(self.window, "Ungültiger Rezeptname",
