@@ -1,3 +1,6 @@
+from model import helper
+from model.recipe_parser import get_ingredients
+from os.path import split
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
 
@@ -21,6 +24,7 @@ class ReController:
         self.window.buttonClearKategorien.clicked.connect(self.clear_categories)
         self.window.buttonClearNahrung.clicked.connect(self.clear_nahrung)
         self.window.buttonClearKohlenhydrate.clicked.connect(self.clear_kohlenhydrate)
+        self.window.buttonSave.clicked.connect(self.save_recipe)
 
 
     def set_image(self, image_path):
@@ -53,6 +57,8 @@ class ReController:
         self.clear_categories()
         self.clear_kohlenhydrate()
         self.clear_nahrung()
+        self.window.buttonReload.setHidden(True)
+        self.window.buttonDeleteRecipe.setHidden(True)
 
 
     def add_ingredient_row(self):
@@ -70,8 +76,9 @@ class ReController:
                 'Öffne Bild', 
                 '',
                 "Image files (*.jpg *.gif *.png *.jpeg *.svg)")
-        self.image = fname
-        self.set_image(fname)
+        if fname:
+            self.image = fname
+            self.set_image(fname)
 
 
     def delete_image(self):
@@ -83,11 +90,12 @@ class ReController:
         selected = self.window.comboBoxKategorien.currentText()
         # add to list
         text = self.window.labelKategorienEdit.text()
-        if text != "":
-            text = text + ", "
-        self.window.labelKategorienEdit.setText(text + selected)
-        # clear comboBox
-        self.window.comboBoxKategorien.clearEditText()
+        if selected not in text.split(', '):
+            if text != "":
+                text = text + ", "
+            self.window.labelKategorienEdit.setText(text + selected)
+            # clear comboBox
+            self.window.comboBoxKategorien.clearEditText()
         print(selected)
 
 
@@ -95,11 +103,12 @@ class ReController:
         selected = self.window.comboBoxNahrung.currentText()
         # add to list
         text = self.window.labelNahrungEdit.text()
-        if text != "":
-            text = text + ", "
-        self.window.labelNahrungEdit.setText(text + selected)
-        # clear comboBox
-        self.window.comboBoxNahrung.clearEditText()
+        if selected not in text.split(', '):
+            if text != "":
+                text = text + ", "
+            self.window.labelNahrungEdit.setText(text + selected)
+            # clear comboBox
+            self.window.comboBoxNahrung.clearEditText()
         print(selected)
 
 
@@ -107,11 +116,12 @@ class ReController:
         selected = self.window.comboBoxKohlenhydrate.currentText()
         # add to list
         text = self.window.labelKohlenhydrateEdit.text()
-        if text != "":
-            text = text + ", "
-        self.window.labelKohlenhydrateEdit.setText(text + selected)
-        # clear comboBox
-        self.window.comboBoxKohlenhydrate.clearEditText()
+        if selected not in text.split(', '):
+            if text != "":
+                text = text + ", "
+            self.window.labelKohlenhydrateEdit.setText(text + selected)
+            # clear comboBox
+            self.window.comboBoxKohlenhydrate.clearEditText()
         print(selected)
 
 
@@ -125,3 +135,71 @@ class ReController:
 
     def clear_kohlenhydrate(self):
         self.window.labelKohlenhydrateEdit.setText("")
+
+
+    def get_ingredients(self):
+        ingredients = []
+        model = self.window.zutatenTableWidget.model()
+        for r in range(0,self.window.zutatenTableWidget.rowCount()):
+            ingredient = []
+            menge = model.data(model.index(r, 0))
+            einheit = model.data(model.index(r, 1))
+            zutat = model.data(model.index(r, 2))
+            if menge or einheit or zutat:
+                if menge:
+                    try:
+                        menge = helper.string_to_float(menge)
+                    except:
+                        QtWidgets.QMessageBox.critical(self.window, "Ungültige Mengenangabe",
+                                "Ungültige Mengeneingabe '" + menge + "'.\n" +
+                                "Entweder als Dezimalzahl (z.B. '1.5')\n" +
+                                "oder als Bruch (z.B. '1 1/2' oder '3/5') eingeben!")
+                        return None
+                else:
+                    menge = ""
+                if not einheit:
+                    einheit = ""
+                if not zutat:
+                    QtWidgets.QMessageBox.critical(self.window, "Ungültige Zutatenangabe",
+                            "Leeres Zutatenfeld!")
+                    return None
+
+                ingredients.append(str(menge) + " " + str(einheit) + " " + str(zutat))
+            else:
+                print("Skipped empty ingredient row")
+        if not ingredients:
+            QtWidgets.QMessageBox.critical(self.window, "Ungültige Zutaten",
+                    "Keine Zutaten angegeben!")
+        return ingredients
+
+
+    def save_recipe(self):
+        name = self.window.nameLineEdit.text()
+        if self.model.check_name(name):
+            ingredients = self.get_ingredients()
+            if ingredients:
+                # read recipe data and save recipe
+                portionen = self.window.spinBoxPortionenEdit.value()
+                anleitung = self.window.textEditAnleitung.toPlainText()
+                kategorien = self.window.labelKategorienEdit.text().split(', ')
+                nahrung = self.window.labelNahrungEdit.text().split(', ')
+                kohlenhydrate = self.window.labelKohlenhydrateEdit.text().split(', ')
+                
+                print("====== Recipe Data ======")
+                print(name)
+                print(self.image)
+                print(ingredients)
+                print(portionen)
+                print(anleitung)
+                print(kategorien)
+                print(nahrung)
+                print(kohlenhydrate)
+                print("====== Recipe Data end ======")
+
+                self.model.save_recipe(name, self.image, ingredients, portionen,
+                        anleitung, kategorien, nahrung, kohlenhydrate)
+
+        else:
+            QtWidgets.QMessageBox.critical(self.window, "Ungültiger Rezeptname",
+                    "Ein Rezept mit diesem Namen ist bereits vorhanden.\n" +
+                    "Bitte wähle einen anderen Namen!")

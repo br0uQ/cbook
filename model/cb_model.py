@@ -65,3 +65,16 @@ class CbModel:
 
     def get_ingredients(self, recipe):
         return rp.get_ingredients(recipe)
+
+
+    def check_name(self, name):
+        for r in self.get_recipes():
+            rd = self.get_recipe_dict(r)
+            if name == rp.get_name(rd):
+                return False
+        return True
+
+
+    def save_recipe(self, name, image, ingredients, servings, instructions,
+            categories, nahrung, kohlenhydrate):
+        print("Todo")

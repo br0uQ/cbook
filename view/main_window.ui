@@ -1520,7 +1520,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QTextEdit" name="textEdit"/>
+               <widget class="QTextEdit" name="textEditAnleitung"/>
               </item>
               <item>
                <spacer name="verticalSpacer_16">
