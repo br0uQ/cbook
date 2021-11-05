@@ -1,3 +1,5 @@
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QLabel
 from model import helper
 import os
 
@@ -50,42 +52,52 @@ class RvController:
         return instruction_text
 
 
+    def clear_ingredients(self):
+        grid = self.window.zutatenGrid
+        for i in range(1, grid.rowCount()):
+            item = grid.itemAtPosition(i, 0)
+            if item:
+                item.widget().deleteLater()
+            item = grid.itemAtPosition(i, 1)
+            if item:
+                item.widget().deleteLater()
+            item = grid.itemAtPosition(i, 2)
+            if item:
+                item.widget().deleteLater()
+
+
     def set_ingredients(self, ingredients):
-        ings = self.get_ingredients(ingredients)
-        self.window.mengeLabel.setText(ings[0])
-        self.window.einheitLabel.setText(ings[1])
-        self.window.zutatLabel.setText(ings[2])
+        self.clear_ingredients()
+        grid = self.window.zutatenGrid
+        for x, i in enumerate(ingredients):
+            if len(i.split(' ')) >= 3:
+                label = QLabel(i.split(' ')[0].replace(",", "."))
+                label.setAlignment(Qt.AlignRight)
+                grid.addWidget(label, x + 1, 0)
+                grid.addWidget(QLabel(i.split(' ')[1]), x + 1, 1)
+                ing = ""
+                for e in i.split(' ')[2:]:
+                    ing = ing + e + " "
+                grid.addWidget(QLabel(ing[:-1]), x + 1, 2)
+
+
+    def get_amounts(self, ingredients):
+        amounts = []
+        for x, i in enumerate(ingredients):
+            if len(i.split(' ')) >= 3:
+                amounts.append(i.split(' ')[0].replace(",", "."))
+        return amounts
 
 
     def change_servings(self, recipe_dict):
         default_servings = self.model.get_servings(recipe_dict)
         new_servings = self.window.portionenSpinBox.value()
-        ings = self.get_ingredients(self.model.get_ingredients(recipe_dict))
-        amounts = ings[0].split('\n')
-        new_amounts = ""
-        for a in amounts:
-            if a != '':
-
-                convert = "%g" % (float(a) * new_servings / default_servings)
-                new_amounts = new_amounts + convert + "\n"
-        self.window.mengeLabel.setText(new_amounts)
-
-
-    def get_ingredients(self, ingredients):
-        amount = ""
-        unit = ""
-        ingredient = ""
-        for i in ingredients:
-            if len(i.split(';')) >= 3:
-                amount = amount + i.split(';')[0] + "\n"
-                unit = unit + i.split(';')[1] + "\n"
-                ingredient = ingredient + i.split(';')[2] + "\n"
-            elif len(i.split()) >= 3:
-                amount = amount + i.split()[0] + "\n"
-                unit = unit + i.split()[1] + "\n"
-                ing = ""
-                for e in i.split()[2:]:
-                    ing = ing + e + " "
-                ingredient = ingredient + ing + "\n"
-        amount = amount.replace(",", ".")
-        return [amount, unit, ingredient]
+        grid = self.window.zutatenGrid
+        amounts = self.get_amounts(self.model.get_ingredients(recipe_dict))
+        for i in range(1, len(amounts)):
+            item = grid.itemAtPosition(i, 0)
+            if item:
+                a = amounts[i - 1]
+                if a != '':
+                    convert = "%g" % (float(a) * new_servings / default_servings)
+                    item.widget().setText(convert)
