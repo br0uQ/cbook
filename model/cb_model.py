@@ -1,8 +1,8 @@
+from config import config
 from model import recipe_parser as rp
 
 
 class CbModel:
-    mypath = "./data/test-recipes/"
     recipes = []
     label_no_c = "k_Keine Kategorie"
     label_no_n = "n_Kein Nahrungstyp"
@@ -10,7 +10,7 @@ class CbModel:
 
 
     def load_recipes(self):
-        self.recipes = rp.get_recipes(self.mypath)
+        self.recipes = rp.get_recipes(config.get_recipe_path())
 
 
     def get_recipes(self):
@@ -84,7 +84,7 @@ class CbModel:
         print("Todo")
         rd = rp.create_recipe_dict(name, ingredients, servings, description,
                 instructions, categories, nahrung, kohlenhydrate)
-        rp.write_recipe(self.mypath, rd, image)
+        rp.write_recipe(config.get_recipe_path(), rd, image)
 
 
     def delete_recipe(self, recipe):

@@ -12,10 +12,10 @@ def get_recipes(recipepath):
     recipes = []
 
     for file in files:
-        fullpath = recipepath + file
+        fullpath = os.path.join(recipepath, file)
         if isdir(fullpath):
-            if lexists(fullpath + "/recipe.json"):
-                recipes.append(fullpath + "/recipe.json")
+            if lexists(os.path.join(fullpath, "recipe.json")):
+                recipes.append(os.path.join(fullpath, "recipe.json"))
     return recipes
 
 
@@ -79,9 +79,9 @@ def create_recipe_dict(name, ingredients, servings, description, instructions,
 def save_image(image, target_folder):
     img = Image.open(image)
     rgb_image = img.convert('RGB')
-    rgb_image.save(target_folder + "/full.jpg")
+    rgb_image.save(os.path.join(target_folder, "full.jpg"))
     thumb = rgb_image.resize((THUMB_SIZE, THUMB_SIZE))
-    thumb.save(target_folder + "/thumb.jpg", quality=90)
+    thumb.save(os.path.join(target_folder, "thumb.jpg"), quality=90)
 
 
 def write_recipe(recipe_path, recipe_dict, image):

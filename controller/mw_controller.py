@@ -4,7 +4,7 @@ from controller.re_controller import ReController
 from controller.rc_controller import RvController
 from view import recipe_button as rb
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QCheckBox, QDialogButtonBox, QMessageBox, QVBoxLayout
+from PyQt5.QtWidgets import QCheckBox, QDialogButtonBox, QFileDialog, QMessageBox, QVBoxLayout
 import os
 from os.path import split
 
@@ -23,7 +23,6 @@ class MwController:
         self.re_controller = ReController(model, window)
 
         self.window.recipeList.layout().addStretch()
-        self.load_recipes()
 
         self.window.backButton.clicked.connect(self.open_recipe_list)
         self.window.buttonCancel.clicked.connect(self.open_recipe_list)
@@ -31,10 +30,10 @@ class MwController:
         self.window.buttonSave.clicked.connect(self.save_recipe)
         self.window.editButton.clicked.connect(self.edit_recipe)
         self.window.toolButtonDelete.clicked.connect(self.open_confirmation_dialog)
+        self.window.toolButtonFolder.clicked.connect(self.change_folder)
 
         recipes_path = config.get_recipe_path()
-        print(recipes_path)
-        while not recipes_path:
+        while not config.get_recipe_path():
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
             msg.setText("Noch kein Rezeptordner ausgewählt.")
@@ -47,7 +46,27 @@ class MwController:
                 exit()
             elif ret == QMessageBox.Open:
                 # open file chooser
-                print("todo")
+                fd = QFileDialog()
+                options = QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks
+                text = "Wähle Rezeptordner"
+                path = os.path.expanduser('~')
+                dir = fd.getExistingDirectory(msg, text, path, options)
+                if dir:
+                    config.set_recipe_path(dir)
+
+        self.load_recipes()
+
+
+    def change_folder(self):
+        fd = QFileDialog()
+        options = QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks
+        text = "Wähle Rezeptordner"
+        path = os.path.expanduser('~')
+        dir = fd.getExistingDirectory(self.window, text, path, options)
+        if dir:
+            config.set_recipe_path(dir)
+        self.window.delete_recipe_buttons()
+        self.load_recipes()
 
 
     def load_recipes(self):

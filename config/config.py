@@ -27,4 +27,5 @@ def get_recipe_path():
 
 def set_recipe_path(path):
     config['DEFAULT']['recipe_path'] = path
-    config.write(configfile)
+    with open(full_config_file_path, 'w') as configfile:
+        config.write(configfile)

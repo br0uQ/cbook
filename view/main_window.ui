@@ -128,6 +128,37 @@
          <widget class="QWidget" name="center" native="true">
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item>
+              <spacer name="horizontalSpacer_21">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonFolder">
+               <property name="text">
+                <string> Rezeptordner wechseln</string>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>Folders-icon.png</normaloff>Folders-icon.png</iconset>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextBesideIcon</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
             <widget class="QScrollArea" name="scrollArea_2">
              <property name="widgetResizable">
               <bool>true</bool>
@@ -141,7 +172,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>1300</width>
-                <height>1303</height>
+                <height>1267</height>
                </rect>
               </property>
               <property name="layoutDirection">
