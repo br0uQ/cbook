@@ -1,4 +1,5 @@
 from model import helper
+from config import config
 from controller.re_controller import ReController
 from controller.rc_controller import RvController
 from view import recipe_button as rb
@@ -30,6 +31,23 @@ class MwController:
         self.window.buttonSave.clicked.connect(self.save_recipe)
         self.window.editButton.clicked.connect(self.edit_recipe)
         self.window.toolButtonDelete.clicked.connect(self.open_confirmation_dialog)
+
+        recipes_path = config.get_recipe_path()
+        print(recipes_path)
+        while not recipes_path:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Noch kein Rezeptordner ausgewählt.")
+            msg.setInformativeText("Bitte einen Rezeptordner wählen!")
+            msg.setWindowTitle("Rezeptordner wählen")
+            msg.setStandardButtons(QMessageBox.Open | QMessageBox.Cancel)
+
+            ret = msg.exec_()
+            if ret == QMessageBox.Cancel:
+                exit()
+            elif ret == QMessageBox.Open:
+                # open file chooser
+                print("todo")
 
 
     def load_recipes(self):
