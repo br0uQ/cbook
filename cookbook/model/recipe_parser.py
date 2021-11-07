@@ -86,7 +86,7 @@ def save_image(image, target_folder):
 
 def write_recipe(recipe_path, recipe_dict, image):
     data = json.dumps(recipe_dict)
-    folder = recipe_path + get_name(recipe_dict)
+    folder = os.path.join(recipe_path, get_name(recipe_dict))
     os.makedirs(folder, exist_ok=True)
     filepath = folder + "/recipe.json"
     f = open(filepath, "w")

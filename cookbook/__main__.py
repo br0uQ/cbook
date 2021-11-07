@@ -1,8 +1,7 @@
 #!/bin/env python3
-from view.main_window import MainWindow
-import model.cb_model as model
-from model import cb_model
-from controller import mw_controller as mwc
+from cookbook.view.main_window import MainWindow
+from cookbook.model import cb_model
+from cookbook.controller import mw_controller as mwc
 
 # Qt
 import sys
@@ -22,4 +21,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-VERSION = '1.0.0'
+VERSION = '0.0.1'
 DESCRIPTION = "Cookbook app: create, edit, show and filter recipes."
 
 setup(
@@ -21,10 +21,25 @@ setup(
     keywords = ["cookbook", "recpipes", "recipe management"],
     url = "https://github.com/br0uQ/cookbook",
     packages=find_packages(),
-    install_requires=[],
+    package_data={
+        'cookbook.view': [
+            '*.ui',
+            '*.png',
+            '*.svg',
+        ],
+    },
+    install_requires=[
+        'PyQt5',
+        'Pillow',
+    ],
     long_description=read('README.md'),
+    entry_points = {
+        'console_scripts': [
+            'cookbook = cookbook.__main__:main'
+        ]
+    },
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 3 - Alpha",
         "Environment :: X11 Applications :: Qt",
         "Intended Audience :: End Users/Desktop",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",

@@ -11,6 +11,7 @@ def clear_layout(layout):
         if widget:
             widget.deleteLater()
 
+
 def get_label_string(labels):
     ret = ""
     for l in labels:

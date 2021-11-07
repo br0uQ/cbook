@@ -1,7 +1,15 @@
-from model import helper
+from cookbook.model import helper
 from PyQt5 import uic
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QLabel, QMainWindow
+import os, sys
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
 
 
 class MainWindow(QMainWindow):
@@ -10,7 +18,8 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super(MainWindow, self).__init__()
-        uic.loadUi("view/main_window.ui", self)
+        ui_file = resource_path("main_window.ui")
+        uic.loadUi(ui_file, self)
 
 
     def add_recipe(self, recipe_button):

@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QLabel
-from model import helper
+from cookbook.model import helper
 import os
 
 
