@@ -32,6 +32,7 @@ setup(
         'Pillow',
     ],
     long_description=read('README.md'),
+    long_description_content_type="text/markdown",
     entry_points = {
         'console_scripts': [
             'cbook = cbook.__main__:main'
