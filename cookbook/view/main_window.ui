@@ -147,10 +147,6 @@
                <property name="text">
                 <string> Rezeptordner wechseln</string>
                </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>Folders-icon.png</normaloff>Folders-icon.png</iconset>
-               </property>
                <property name="toolButtonStyle">
                 <enum>Qt::ToolButtonTextBesideIcon</enum>
                </property>
@@ -172,7 +168,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>1300</width>
-                <height>1267</height>
+                <height>1269</height>
                </rect>
               </property>
               <property name="layoutDirection">
@@ -196,11 +192,7 @@
             <item>
              <widget class="QToolButton" name="backButton">
               <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>Arrow-Back-icon.png</normaloff>Arrow-Back-icon.png</iconset>
+               <string>Zurück</string>
               </property>
               <property name="iconSize">
                <size>
@@ -210,6 +202,9 @@
               </property>
               <property name="shortcut">
                <string/>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonTextBesideIcon</enum>
               </property>
              </widget>
             </item>
@@ -229,34 +224,32 @@
             <item>
              <widget class="QToolButton" name="toolButtonDelete">
               <property name="text">
-               <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>Editing-Delete-icon.png</normaloff>Editing-Delete-icon.png</iconset>
+               <string>Löschen</string>
               </property>
               <property name="iconSize">
                <size>
                 <width>48</width>
                 <height>48</height>
                </size>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonTextBesideIcon</enum>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QToolButton" name="editButton">
               <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>Pencil-icon.png</normaloff>Pencil-icon.png</iconset>
+               <string>Bearbeiten</string>
               </property>
               <property name="iconSize">
                <size>
                 <width>48</width>
                 <height>48</height>
                </size>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonTextBesideIcon</enum>
               </property>
              </widget>
             </item>
@@ -273,7 +266,7 @@
                <x>0</x>
                <y>0</y>
                <width>1607</width>
-               <height>1259</height>
+               <height>1289</height>
               </rect>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -359,7 +352,7 @@
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>knife_and_fork.svg</pixmap>
+                   <pixmap>meal_icon.svg</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -803,17 +796,16 @@
           <item>
            <widget class="QToolButton" name="buttonCancel">
             <property name="text">
-             <string>abort</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>Close-icon.png</normaloff>Close-icon.png</iconset>
+             <string>Abbrechen</string>
             </property>
             <property name="iconSize">
              <size>
               <width>48</width>
               <height>48</height>
              </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
             </property>
            </widget>
           </item>
@@ -833,34 +825,32 @@
           <item>
            <widget class="QToolButton" name="buttonReload">
             <property name="text">
-             <string>reload</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>Refresh-icon.png</normaloff>Refresh-icon.png</iconset>
+             <string>Änderungen verwerfen</string>
             </property>
             <property name="iconSize">
              <size>
               <width>48</width>
               <height>48</height>
              </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="buttonSave">
             <property name="text">
-             <string>SAve</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>Programming-Save-icon.png</normaloff>Programming-Save-icon.png</iconset>
+             <string>Speichern</string>
             </property>
             <property name="iconSize">
              <size>
               <width>48</width>
               <height>48</height>
              </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
             </property>
            </widget>
           </item>
@@ -877,7 +867,7 @@
              <x>0</x>
              <y>0</y>
              <width>1609</width>
-             <height>1261</height>
+             <height>1291</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -961,7 +951,7 @@
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap>knife_and_fork.svg</pixmap>
+                 <pixmap>meal_icon.svg</pixmap>
                 </property>
                 <property name="scaledContents">
                  <bool>true</bool>
@@ -975,20 +965,12 @@
                   <property name="text">
                    <string>load</string>
                   </property>
-                  <property name="icon">
-                   <iconset>
-                    <normaloff>Photos-icon.png</normaloff>Photos-icon.png</iconset>
-                  </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QToolButton" name="deleteImageButton">
                   <property name="text">
                    <string>delete</string>
-                  </property>
-                  <property name="icon">
-                   <iconset>
-                    <normaloff>Editing-Delete-icon.png</normaloff>Editing-Delete-icon.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1225,11 +1207,7 @@
                   <item>
                    <widget class="QToolButton" name="buttonClearKohlenhydrate">
                     <property name="text">
-                     <string>...</string>
-                    </property>
-                    <property name="icon">
-                     <iconset>
-                      <normaloff>Editing-Delete-icon.png</normaloff>Editing-Delete-icon.png</iconset>
+                     <string>clear</string>
                     </property>
                    </widget>
                   </item>
@@ -1325,11 +1303,7 @@
                   <item>
                    <widget class="QToolButton" name="buttonClearNahrung">
                     <property name="text">
-                     <string>...</string>
-                    </property>
-                    <property name="icon">
-                     <iconset>
-                      <normaloff>Editing-Delete-icon.png</normaloff>Editing-Delete-icon.png</iconset>
+                     <string>clear</string>
                     </property>
                    </widget>
                   </item>
@@ -1437,11 +1411,7 @@
                   <item>
                    <widget class="QToolButton" name="buttonClearKategorien">
                     <property name="text">
-                     <string>...</string>
-                    </property>
-                    <property name="icon">
-                     <iconset>
-                      <normaloff>Editing-Delete-icon.png</normaloff>Editing-Delete-icon.png</iconset>
+                     <string>clear</string>
                     </property>
                    </widget>
                   </item>

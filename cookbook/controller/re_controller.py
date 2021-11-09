@@ -6,7 +6,6 @@ from PyQt5.QtGui import QPixmap
 
 
 class ReController:
-    default_image = "view/knife_and_fork.svg"
     image = ""
     edit = False
 
@@ -62,7 +61,7 @@ class ReController:
         self.window.nameLineEdit.setText("")
         self.window.zutatenTableWidget.setRowCount(1)
         self.window.zutatenTableWidget.clearContents()
-        self.set_image(self.default_image)
+        self.set_image(self.window.get_default_meal_image_path())
         self.window.spinBoxPortionenEdit.setValue(4)
         self.window.buttonReload.setHidden(True)
         self.clear_categories()
@@ -146,7 +145,7 @@ class ReController:
 
     def delete_image(self):
         self.image = ""
-        self.set_image(self.default_image)
+        self.set_image(self.window.get_default_meal_image_path())
 
 
     def activated_kategorien(self):
