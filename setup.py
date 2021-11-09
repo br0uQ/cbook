@@ -12,19 +12,18 @@ VERSION = '0.0.1'
 DESCRIPTION = "Cookbook app: create, edit, show and filter recipes."
 
 setup(
-    name = "cookbook",
+    name = "cbook",
     version = VERSION,
     author = "Joshua Schmucker",
     author_email = "joshua.schmucker@gmail.com",
     description = DESCRIPTION,
     license = "GNU GPLv3",
-    keywords = ["cookbook", "recpipes", "recipe management"],
-    url = "https://github.com/br0uQ/cookbook",
+    keywords = ["cbook", "recpipes", "recipe management"],
+    url = "https://github.com/br0uQ/cbook",
     packages=find_packages(),
     package_data={
-        'cookbook.view': [
+        'cbook.view': [
             '*.ui',
-            '*.png',
             '*.svg',
         ],
     },
@@ -35,7 +34,7 @@ setup(
     long_description=read('README.md'),
     entry_points = {
         'console_scripts': [
-            'cookbook = cookbook.__main__:main'
+            'cbook = cbook.__main__:main'
         ]
     },
     classifiers=[

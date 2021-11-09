@@ -1,7 +1,7 @@
 #!/bin/env python3
-from cookbook.view.main_window import MainWindow
-from cookbook.model import cb_model
-from cookbook.controller import mw_controller as mwc
+from cbook.view.main_window import MainWindow
+from cbook.model import cb_model
+from cbook.controller import mw_controller as mwc
 
 # Qt
 import sys

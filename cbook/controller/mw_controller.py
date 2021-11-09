@@ -1,8 +1,8 @@
-from cookbook.model import helper
-from cookbook.config import config
-from cookbook.controller.re_controller import ReController
-from cookbook.controller.rc_controller import RvController
-from cookbook.view import recipe_button as rb
+from cbook.model import helper
+from cbook.config import config
+from cbook.controller.re_controller import ReController
+from cbook.controller.rc_controller import RvController
+from cbook.view import recipe_button as rb
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QCheckBox, QDialogButtonBox, QFileDialog, QMessageBox, QVBoxLayout
 import os

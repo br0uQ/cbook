@@ -1,4 +1,4 @@
-from cookbook.model import helper
+from cbook.model import helper
 from PyQt5 import uic
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import QLabel, QMainWindow, QStyle, QToolButton

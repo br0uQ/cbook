@@ -1,5 +1,5 @@
-from cookbook.config import config
-from cookbook.model import recipe_parser as rp
+from cbook.config import config
+from cbook.model import recipe_parser as rp
 
 
 class CbModel:

@@ -1,5 +1,5 @@
 import os
-from cookbook.model import helper, recipe_parser
+from cbook.model import helper, recipe_parser
 from os.path import split
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
