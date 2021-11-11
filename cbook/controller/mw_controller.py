@@ -11,10 +11,8 @@ from os.path import split
 
 
 class MwController:
-    label_filter = []
-    categories = []
-    nahrung = []
-    kohlehydrate = []
+    tag_filter = []
+    tags = []
     
     def __init__(self, model, window):
         self.model = model
@@ -88,37 +86,20 @@ class MwController:
 
     def read_recipes(self):
         self.recipes = self.model.get_recipes()
-        self.categories = []
-        self.nahrung = []
-        self.kohlehydrate = []
+        self.tags = []
         for r in self.recipes:
             rd = self.model.get_recipe_dict(r)
-            self.categories = self.categories + self.model.get_kategorien(rd)
-            self.nahrung = self.nahrung + self.model.get_nahrung(rd)
-            self.kohlehydrate = self.kohlehydrate + self.model.get_kohlehydrat(rd)
+            self.tags = self.tags + self.model.get_tags(rd).split(',')
             self.window.add_recipe(self.create_recipe_button(r, rd))
-        self.categories = sorted(set(self.categories))
-        self.nahrung = sorted(set(self.nahrung))
-        self.kohlehydrate = sorted(set(self.kohlehydrate))
-        self.label_filter = self.categories + self.nahrung + self.kohlehydrate
+        self.tags = sorted(set(self.tags))
+        self.tag_filter = self.tags
 
 
     def show_button(self, recipe_dict):
-        show = False
-        for c in self.model.get_kategorien(recipe_dict):
-            if c in self.label_filter:
-                show = True
-        if show:
-            show = False
-            for n in self.model.get_nahrung(recipe_dict):
-                if n in self.label_filter:
-                    show = True
-        if show:
-            show = False
-            for kh in self.model.get_kohlehydrat(recipe_dict):
-                if kh in self.label_filter:
-                    show = True
-        return show
+        for t in self.model.get_tags(recipe_dict).split(','):
+            if t in self.tag_filter:
+                return True
+        return False
 
 
     def filter_recipes(self):
@@ -128,39 +109,33 @@ class MwController:
             b.setHidden(not self.show_button(rd))
 
 
-    def filter_label(self, state, label):
+    def filter_tag(self, state, tag):
         if QtCore.Qt.Checked == state:
-            if label not in self.label_filter:
-                self.label_filter.append(label)
+            if tag not in self.tag_filter:
+                self.tag_filter.append(tag)
         else:
-            if label in self.label_filter:
-                self.label_filter.remove(label)
+            if tag in self.tag_filter:
+                self.tag_filter.remove(tag)
         self.filter_recipes()
 
 
-    def create_checkbox(self, label):
-        cb = QCheckBox(label.split('_')[1])
-        cb.categorie = label
-        if label in self.label_filter:
+    def create_checkbox(self, tag):
+        cb = QCheckBox(tag)
+        cb.tag = tag
+        if tag in self.tag_filter:
             cb.setChecked(True)
-        cb.stateChanged.connect(lambda s, l=label: self.filter_label(s, l))
+        cb.stateChanged.connect(lambda s, t=tag: self.filter_tag(s, t))
         return cb
 
 
     def clear_checkboxes(self):
-        helper.clear_layout(self.window.kategorieGroupBox.layout())
-        helper.clear_layout(self.window.nahrungGroupBox.layout())
-        helper.clear_layout(self.window.kohlehydrateGroupBox.layout())
+        helper.clear_layout(self.window.tagsGroupBox.layout())
 
 
     def create_checkboxes(self):
         self.clear_checkboxes()
-        for c in self.categories:
-            self.window.kategorieGroupBox.layout().addWidget(self.create_checkbox(c))
-        for n in self.nahrung:
-            self.window.nahrungGroupBox.layout().addWidget(self.create_checkbox(n))
-        for k in self.kohlehydrate:
-            self.window.kohlehydrateGroupBox.layout().addWidget(self.create_checkbox(k))
+        for t in self.tags:
+            self.window.tagsGroupBox.layout().addWidget(self.create_checkbox(t))
 
 
     def get_image_path(self, recipe_path):
@@ -192,8 +167,7 @@ class MwController:
 
 
     def edit_recipe(self):
-        self.re_controller.prepare_edit(self.recipe, self.categories,
-                self.nahrung, self.kohlehydrate)
+        self.re_controller.prepare_edit(self.recipe, self.tags)
         self.window.stackedWidget.setCurrentIndex(2)
 
 
@@ -202,7 +176,7 @@ class MwController:
 
 
     def create_new_recipe(self):
-        self.re_controller.prepare_new(self.categories, self.nahrung, self.kohlehydrate)
+        self.re_controller.prepare_new(self.tags)
         self.window.stackedWidget.setCurrentIndex(2)
 
 

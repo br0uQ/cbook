@@ -28,15 +28,10 @@ class RvController:
         self.window.beschreibungLabel.setText(self.model.get_description(recipe_dict))
         self.window.portionenSpinBox.setValue(self.model.get_servings(recipe_dict))
 
-        # kategorien
-        k = self.model.get_kategorien(recipe_dict)
-        self.window.kategorieLabel.setText(helper.get_label_string(k))
+        # tags
+        t = self.model.get_tags(recipe_dict)
+        self.window.tagsLabel.setText(t)
 
-        n = self.model.get_nahrung(recipe_dict)
-        self.window.nahrungstypLabel.setText(helper.get_label_string(n))
-
-        kh = self.model.get_kohlehydrat(recipe_dict)
-        self.window.kohlenhydrateLabel.setText(helper.get_label_string(kh))
         self.set_ingredients(self.model.get_ingredients(recipe_dict))
 
         self.window.portionenSpinBox.valueChanged.connect(lambda: self.change_servings(recipe_dict))

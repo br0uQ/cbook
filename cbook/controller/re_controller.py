@@ -18,12 +18,8 @@ class ReController:
         self.window.buttonDeleteIngredient.clicked.connect(self.delete_ingredient_row)
         self.window.loadImageButton.clicked.connect(self.open_select_image)
         self.window.deleteImageButton.clicked.connect(self.delete_image)
-        self.window.comboBoxKategorien.activated.connect(self.activated_kategorien)
-        self.window.comboBoxNahrung.activated.connect(self.activated_nahrung)
-        self.window.comboBoxKohlenhydrate.activated.connect(self.activated_kohlenhydrate)
-        self.window.buttonClearKategorien.clicked.connect(self.clear_categories)
-        self.window.buttonClearNahrung.clicked.connect(self.clear_nahrung)
-        self.window.buttonClearKohlenhydrate.clicked.connect(self.clear_kohlenhydrate)
+        self.window.comboBoxTags.activated.connect(self.activated_tags)
+        self.window.buttonClearTags.clicked.connect(self.clear_tags)
         self.window.buttonReload.clicked.connect(self.reload)
 
 
@@ -36,37 +32,21 @@ class ReController:
         self.window.imageLabelEdit.setPixmap(pixmap)
 
 
-    def remove_prefix(self, labels):
-        ret = []
-        for l in labels:
-            ret.append(l.split('_')[1])
-        return ret
+    def prepare_tags(self, tags):
+        self.window.comboBoxTags.clear()
+        self.window.comboBoxTags.addItems(tags)
 
 
-    def prepare_labels(self, categories, nahrungs, kohlehydrate):
-        categories = self.remove_prefix(categories)
-        nahrungs = self.remove_prefix(nahrungs)
-        kohlehydrate = self.remove_prefix(kohlehydrate)
-        self.window.comboBoxKategorien.clear()
-        self.window.comboBoxKategorien.addItems(categories)
-        self.window.comboBoxNahrung.clear()
-        self.window.comboBoxNahrung.addItems(nahrungs)
-        self.window.comboBoxKohlenhydrate.clear()
-        self.window.comboBoxKohlenhydrate.addItems(kohlehydrate)
-
-
-    def prepare_new(self, categories, nahrungs, kohlehydrate):
+    def prepare_new(self, tags):
         self.edit = False
-        self.prepare_labels(categories, nahrungs, kohlehydrate)
+        self.prepare_tags(tags)
         self.window.nameLineEdit.setText("")
         self.window.zutatenTableWidget.setRowCount(1)
         self.window.zutatenTableWidget.clearContents()
         self.set_image(self.window.get_default_meal_image_path())
         self.window.spinBoxPortionenEdit.setValue(4)
         self.window.buttonReload.setHidden(True)
-        self.clear_categories()
-        self.clear_kohlenhydrate()
-        self.clear_nahrung()
+        self.clear_tags()
         self.window.textEditAnleitung.setText("")
         self.window.textEditBeschreibung.setText("")
 
@@ -107,19 +87,15 @@ class ReController:
             text = text + i + "\n\n"
         self.window.textEditAnleitung.setText(text)
         self.window.textEditBeschreibung.setText(self.model.get_description(rd))
-        k = self.model.get_kategorien(rd)
-        n = self.model.get_nahrung(rd)
-        kh = self.model.get_kohlehydrat(rd)
-        self.window.labelKategorienEdit.setText(helper.get_label_string(k))
-        self.window.labelNahrungEdit.setText(helper.get_label_string(n))
-        self.window.labelKohlenhydrateEdit.setText(helper.get_label_string(kh))
+        t = self.model.get_tags(rd)
+        self.window.labelTagsEdit.setText(t)
         self.fill_ingredients_table(self.model.get_ingredients(rd))
 
 
-    def prepare_edit(self, recipe, categories, nahrungs, kohlehydrate):
+    def prepare_edit(self, recipe, tags):
         self.edit = True
         self.recipe = recipe
-        self.prepare_labels(categories, nahrungs, kohlehydrate)
+        self.prepare_tags(tags)
         self.fill_data(recipe)
 
 
@@ -148,52 +124,20 @@ class ReController:
         self.set_image(self.window.get_default_meal_image_path())
 
 
-    def activated_kategorien(self):
-        selected = self.window.comboBoxKategorien.currentText()
+    def activated_tags(self):
+        selected = self.window.comboBoxTags.currentText()
         # add to list
-        text = self.window.labelKategorienEdit.text()
-        if selected not in text.split(', '):
+        text = self.window.labelTagsEdit.text()
+        if selected not in text.split(','):
             if text != "":
-                text = text + ", "
-            self.window.labelKategorienEdit.setText(text + selected)
+                text = text + ","
+            self.window.labelTagsEdit.setText(text + selected)
             # clear comboBox
-            self.window.comboBoxKategorien.clearEditText()
+            self.window.comboBoxTags.clearEditText()
 
 
-    def activated_nahrung(self):
-        selected = self.window.comboBoxNahrung.currentText()
-        # add to list
-        text = self.window.labelNahrungEdit.text()
-        if selected not in text.split(', '):
-            if text != "":
-                text = text + ", "
-            self.window.labelNahrungEdit.setText(text + selected)
-            # clear comboBox
-            self.window.comboBoxNahrung.clearEditText()
-
-
-    def activated_kohlenhydrate(self):
-        selected = self.window.comboBoxKohlenhydrate.currentText()
-        # add to list
-        text = self.window.labelKohlenhydrateEdit.text()
-        if selected not in text.split(', '):
-            if text != "":
-                text = text + ", "
-            self.window.labelKohlenhydrateEdit.setText(text + selected)
-            # clear comboBox
-            self.window.comboBoxKohlenhydrate.clearEditText()
-
-
-    def clear_categories(self):
-        self.window.labelKategorienEdit.setText("")
-
-
-    def clear_nahrung(self):
-        self.window.labelNahrungEdit.setText("")
-
-
-    def clear_kohlenhydrate(self):
-        self.window.labelKohlenhydrateEdit.setText("")
+    def clear_tags(self):
+        self.window.labelTagsEdit.setText("")
 
 
     def get_ingredients(self):
@@ -241,12 +185,10 @@ class ReController:
                 portionen = self.window.spinBoxPortionenEdit.value()
                 anleitung = self.window.textEditAnleitung.toPlainText()
                 beschreibung = self.window.textEditBeschreibung.toPlainText()
-                kategorien = self.window.labelKategorienEdit.text().split(', ')
-                nahrung = self.window.labelNahrungEdit.text().split(', ')
-                kohlenhydrate = self.window.labelKohlenhydrateEdit.text().split(', ')
+                tags = self.window.labelTagsEdit.text()
                 
                 self.model.save_recipe(name, self.image, ingredients, portionen,
-                        beschreibung, anleitung, kategorien, nahrung, kohlenhydrate)
+                        beschreibung, anleitung, tags)
 
                 # prevent having two folders with the same recipe
                 if self.edit:

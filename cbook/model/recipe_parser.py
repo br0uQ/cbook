@@ -50,29 +50,15 @@ def get_keywords(recipe):
     return recipe['keywords']
 
 
-def keyword_helper(keyword_list, prefix):
-    keywords = ""
-    for k in keyword_list:
-        if k:
-            keywords = keywords + prefix + k + ","
-    return keywords
-
-def create_keywords(categories, nahrung, kohlenhydrate):
-    keywords = keyword_helper(categories, "k_")
-    keywords = keywords + keyword_helper(nahrung, "n_")
-    keywords = keywords + keyword_helper(kohlenhydrate, "kh_")
-    return keywords[:-1]
-
-
 def create_recipe_dict(name, ingredients, servings, description, instructions,
-        categories, nahrung, kohlenhydrate):
+        tags):
     rd = {
         "name":name,
         "description":description,
         "recipeIngredient":ingredients,
         "recipeInstructions":instructions.split('\n\n'),
         "recipeYield":servings,
-        "keywords":create_keywords(categories, nahrung, kohlenhydrate),
+        "keywords":tags,
             }
     return rd
 

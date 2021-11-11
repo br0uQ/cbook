@@ -63,7 +63,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="kategorieGroupBox">
+                <widget class="QGroupBox" name="tagsGroupBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -71,37 +71,9 @@
                   </sizepolicy>
                  </property>
                  <property name="title">
-                  <string>Kategorie</string>
+                  <string>Tags</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_2"/>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="nahrungGroupBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="title">
-                  <string>Nahrungstyp</string>
-                 </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_3"/>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="kohlehydrateGroupBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="title">
-                  <string>Kohlenhydrate</string>
-                 </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_4"/>
                 </widget>
                </item>
                <item>
@@ -174,7 +146,7 @@
               <property name="layoutDirection">
                <enum>Qt::LeftToRight</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_7"/>
+              <layout class="QVBoxLayout" name="verticalLayout_3"/>
              </widget>
             </widget>
            </item>
@@ -465,96 +437,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,1" rowminimumheight="0,0,0,0">
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_9">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>Portionen</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="2">
-                   <widget class="QLabel" name="kategorieLabel">
-                    <property name="text">
-                     <string>TextLabel</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="2">
-                   <widget class="QLabel" name="kohlenhydrateLabel">
-                    <property name="text">
-                     <string>TextLabel</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_12">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>Nahrugnstyp</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="2">
-                   <widget class="QLabel" name="nahrungstypLabel">
-                    <property name="text">
-                     <string>TextLabel</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_11">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>Kategorie</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label_13">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>Kohlenhydrate</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <spacer name="horizontalSpacer_12">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
+                 <layout class="QGridLayout" name="gridLayout" rowstretch="0,0" columnstretch="0,0,0">
                   <item row="1" column="1">
                    <spacer name="horizontalSpacer_13">
                     <property name="orientation">
@@ -571,24 +454,21 @@
                     </property>
                    </spacer>
                   </item>
-                  <item row="2" column="1">
-                   <spacer name="horizontalSpacer_14">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_9">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
                     </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
+                    <property name="text">
+                     <string>Portionen</string>
                     </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                   </widget>
                   </item>
-                  <item row="3" column="1">
-                   <spacer name="horizontalSpacer_15">
+                  <item row="0" column="1">
+                   <spacer name="horizontalSpacer_12">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -622,6 +502,26 @@
                      </spacer>
                     </item>
                    </layout>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLabel" name="tagsLabel">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_11">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Tags</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -1202,66 +1102,6 @@
               </item>
               <item>
                <layout class="QGridLayout" name="gridLayout_3">
-                <item row="3" column="2">
-                 <layout class="QHBoxLayout" name="horizontalLayout_13">
-                  <item>
-                   <widget class="QToolButton" name="buttonClearKohlenhydrate">
-                    <property name="text">
-                     <string>clear</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="labelKohlenhydrateEdit">
-                    <property name="text">
-                     <string>TextLabel</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_19">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="comboBoxKohlenhydrate">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>160</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="editable">
-                     <bool>true</bool>
-                    </property>
-                    <property name="placeholderText">
-                     <string>Kohlehydrate</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_8">
-                  <property name="text">
-                   <string>Portionen</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="0" column="2">
                  <layout class="QHBoxLayout" name="horizontalLayout_14">
                   <item>
@@ -1282,77 +1122,8 @@
                   </item>
                  </layout>
                 </item>
-                <item row="2" column="1">
-                 <spacer name="horizontalSpacer_8">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item row="2" column="2">
-                 <layout class="QHBoxLayout" name="horizontalLayout_12">
-                  <item>
-                   <widget class="QToolButton" name="buttonClearNahrung">
-                    <property name="text">
-                     <string>clear</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="labelNahrungEdit">
-                    <property name="text">
-                     <string>TextLabel</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_17">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="comboBoxNahrung">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>160</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="editable">
-                     <bool>true</bool>
-                    </property>
-                    <property name="placeholderText">
-                     <string>Nahrugstyp</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item row="3" column="1">
-                 <spacer name="horizontalSpacer_11">
+                <item row="0" column="1">
+                 <spacer name="horizontalSpacer_6">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -1370,7 +1141,7 @@
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_10">
                   <property name="text">
-                   <string>Kategorien</string>
+                   <string>Tags</string>
                   </property>
                  </widget>
                 </item>
@@ -1390,33 +1161,17 @@
                   </property>
                  </spacer>
                 </item>
-                <item row="0" column="1">
-                 <spacer name="horizontalSpacer_6">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
                 <item row="1" column="2">
                  <layout class="QHBoxLayout" name="horizontalLayout_8">
                   <item>
-                   <widget class="QToolButton" name="buttonClearKategorien">
+                   <widget class="QToolButton" name="buttonClearTags">
                     <property name="text">
                      <string>clear</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="labelKategorienEdit">
+                   <widget class="QLabel" name="labelTagsEdit">
                     <property name="text">
                      <string>TextLabel</string>
                     </property>
@@ -1436,7 +1191,7 @@
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="comboBoxKategorien">
+                   <widget class="QComboBox" name="comboBoxTags">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -1462,17 +1217,10 @@
                   </item>
                  </layout>
                 </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_14">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_8">
                   <property name="text">
-                   <string>Nahrungstyp</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="label_15">
-                  <property name="text">
-                   <string>Kohlenhydrate</string>
+                   <string>Portionen</string>
                   </property>
                  </widget>
                 </item>
