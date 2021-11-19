@@ -89,7 +89,7 @@ class RvController:
         new_servings = self.window.sbServings.value()
         grid = self.window.lgIngredients
         amounts = self.get_amounts(self.model.get_ingredients(recipe_dict))
-        for i in range(1, len(amounts)):
+        for i in range(1, len(amounts) + 1):
             item = grid.itemAtPosition(i, 0)
             if item:
                 a = amounts[i - 1]
