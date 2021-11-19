@@ -35,6 +35,8 @@ class MainWindow(QMainWindow):
         self.loadImageButton.setIcon(self.get_icon('document-open', QStyle.SP_FileDialogStart))
         self.toolButtonFolder.setIcon(self.get_icon('folder', QStyle.SP_DirIcon))
         self.buttonNeuesRezept.setIcon(self.get_icon('document-new', QStyle.SP_FileIcon))
+        self.buttonAddIngredient.setIcon(self.get_icon('list-add', QStyle.SP_ArrowDown))
+        self.buttonDeleteIngredient.setIcon(self.get_icon('list-remove', QStyle.SP_ArrowUp))
 
 
     def add_recipe(self, recipe_button):
