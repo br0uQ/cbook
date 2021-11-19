@@ -150,6 +150,7 @@ class ReController:
             zutat = model.data(model.index(r, 2))
             if menge or einheit or zutat:
                 if menge:
+                    menge = menge.replace(",",".")
                     try:
                         menge = helper.string_to_float(menge)
                     except:
@@ -162,6 +163,8 @@ class ReController:
                     menge = ""
                 if not einheit:
                     einheit = ""
+                else:
+                    einheit = einheit.replace(" ","")
                 if not zutat:
                     QtWidgets.QMessageBox.critical(self.window, "Ungültige Zutatenangabe",
                             "Leeres Zutatenfeld!")
