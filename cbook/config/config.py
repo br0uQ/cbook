@@ -2,7 +2,7 @@ import configparser
 import os
  
 
-app_name = "cookbook"
+app_name = "cbook"
 config_folder = os.path.join(os.path.expanduser("~"), '.config', app_name)
 os.makedirs(config_folder, exist_ok=True)
 
