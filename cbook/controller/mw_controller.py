@@ -30,29 +30,39 @@ class MwController:
         self.window.toolButtonDelete.clicked.connect(self.open_confirmation_dialog)
         self.window.toolButtonFolder.clicked.connect(self.change_folder)
 
-        recipes_path = config.get_recipe_path()
-        while not config.get_recipe_path():
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
-            msg.setText("Noch kein Rezeptordner ausgewählt.")
-            msg.setInformativeText("Bitte einen Rezeptordner wählen!")
-            msg.setWindowTitle("Rezeptordner wählen")
-            msg.setStandardButtons(QMessageBox.Open | QMessageBox.Cancel)
-
-            ret = msg.exec_()
-            if ret == QMessageBox.Cancel:
-                exit()
-            elif ret == QMessageBox.Open:
-                # open file chooser
-                fd = QFileDialog()
-                options = QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks
-                text = "Wähle Rezeptordner"
-                path = os.path.expanduser('~')
-                dir = fd.getExistingDirectory(msg, text, path, options)
-                if dir:
-                    config.set_recipe_path(dir)
+        self.check_recipe_path()
 
         self.load_recipes()
+
+
+    def choose_recipe_folder(self, text):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText(text)
+        msg.setInformativeText("Bitte einen Rezeptordner wählen!")
+        msg.setWindowTitle("Rezeptordner wählen")
+        msg.setStandardButtons(QMessageBox.Open | QMessageBox.Cancel)
+
+        ret = msg.exec_()
+        if ret == QMessageBox.Cancel:
+            exit()
+        elif ret == QMessageBox.Open:
+            # open file chooser
+            fd = QFileDialog()
+            options = QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks
+            text = "Wähle Rezeptordner"
+            path = os.path.expanduser('~')
+            dir = fd.getExistingDirectory(msg, text, path, options)
+            if dir:
+                config.set_recipe_path(dir)
+
+
+    def check_recipe_path(self):
+        recipes_path = config.get_recipe_path()
+        while not config.get_recipe_path():
+            self.choose_recipe_folder("Noch kein Rezeptordner ausgewählt.")
+        if not os.path.exists(config.get_recipe_path()):
+            self.choose_recipe_folder("Rezepteordner existierst nicht: " + config.get_recipe_path())
 
 
     def change_folder(self):
