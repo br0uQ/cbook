@@ -53,7 +53,7 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <item>
-                <widget class="QToolButton" name="buttonNeuesRezept">
+                <widget class="QToolButton" name="btnNewRecipe">
                  <property name="text">
                   <string>Neues Rezept</string>
                  </property>
@@ -63,7 +63,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QGroupBox" name="tagsGroupBox">
+                <widget class="QGroupBox" name="gbTags">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -115,7 +115,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QToolButton" name="toolButtonFolder">
+              <widget class="QToolButton" name="btnRecipeDir">
                <property name="text">
                 <string> Rezeptordner wechseln</string>
                </property>
@@ -134,7 +134,7 @@
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
              </property>
-             <widget class="QWidget" name="recipeList">
+             <widget class="QWidget" name="lhRecipeList">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -162,7 +162,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
-             <widget class="QToolButton" name="backButton">
+             <widget class="QToolButton" name="btnBack">
               <property name="text">
                <string>Zurück</string>
               </property>
@@ -194,7 +194,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="toolButtonDelete">
+             <widget class="QToolButton" name="btnDelete">
               <property name="text">
                <string>Löschen</string>
               </property>
@@ -210,7 +210,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="editButton">
+             <widget class="QToolButton" name="btnEdit">
               <property name="text">
                <string>Bearbeiten</string>
               </property>
@@ -277,7 +277,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLabel" name="nameLabel">
+                 <widget class="QLabel" name="lblRecipeName">
                   <property name="font">
                    <font>
                     <pointsize>14</pointsize>
@@ -307,7 +307,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLabel" name="imageLabel">
+                 <widget class="QLabel" name="lblRecipeImage">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -348,7 +348,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <layout class="QGridLayout" name="zutatenGrid" columnstretch="0,0,1">
+                 <layout class="QGridLayout" name="lgIngredients" columnstretch="0,0,1">
                   <item row="0" column="0">
                    <widget class="QLabel" name="label_18">
                     <property name="font">
@@ -486,7 +486,7 @@
                   <item row="0" column="2">
                    <layout class="QHBoxLayout" name="horizontalLayout_11">
                     <item>
-                     <widget class="QSpinBox" name="portionenSpinBox"/>
+                     <widget class="QSpinBox" name="sbServings"/>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_16">
@@ -504,7 +504,7 @@
                    </layout>
                   </item>
                   <item row="1" column="2">
-                   <widget class="QLabel" name="tagsLabel">
+                   <widget class="QLabel" name="lblTags">
                     <property name="text">
                      <string>TextLabel</string>
                     </property>
@@ -571,7 +571,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLabel" name="beschreibungLabel">
+                 <widget class="QLabel" name="lblDescription">
                   <property name="text">
                    <string>TextLabel</string>
                   </property>
@@ -635,7 +635,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLabel" name="anleitungLabel">
+                 <widget class="QLabel" name="lblInstructions">
                   <property name="maximumSize">
                    <size>
                     <width>1000</width>
@@ -694,7 +694,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
-           <widget class="QToolButton" name="buttonCancel">
+           <widget class="QToolButton" name="btnCancel">
             <property name="text">
              <string>Abbrechen</string>
             </property>
@@ -723,7 +723,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="buttonReload">
+           <widget class="QToolButton" name="btnReload">
             <property name="text">
              <string>Änderungen verwerfen</string>
             </property>
@@ -739,7 +739,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="buttonSave">
+           <widget class="QToolButton" name="btnSave">
             <property name="text">
              <string>Speichern</string>
             </property>
@@ -819,7 +819,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="nameLineEdit"/>
+                 <widget class="QLineEdit" name="leName"/>
                 </item>
                </layout>
               </item>
@@ -840,7 +840,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QLabel" name="imageLabelEdit">
+               <widget class="QLabel" name="lblRecipeImageEdit">
                 <property name="maximumSize">
                  <size>
                   <width>512</width>
@@ -861,14 +861,14 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
-                 <widget class="QToolButton" name="loadImageButton">
+                 <widget class="QToolButton" name="btnLoadImage">
                   <property name="text">
                    <string>load</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QToolButton" name="deleteImageButton">
+                 <widget class="QToolButton" name="btnDeleteImage">
                   <property name="text">
                    <string>delete</string>
                   </property>
@@ -915,7 +915,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_15">
                 <item>
-                 <widget class="QTableWidget" name="zutatenTableWidget">
+                 <widget class="QTableWidget" name="twIngredients">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                     <horstretch>0</horstretch>
@@ -1013,7 +1013,7 @@
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_15" stretch="0,0,0">
                   <item>
-                   <widget class="QToolButton" name="buttonAddIngredient">
+                   <widget class="QToolButton" name="btnAddIngredient">
                     <property name="text">
                      <string>...</string>
                     </property>
@@ -1024,7 +1024,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QToolButton" name="buttonDeleteIngredient">
+                   <widget class="QToolButton" name="btnDeleteIngredient">
                     <property name="text">
                      <string>...</string>
                     </property>
@@ -1105,7 +1105,7 @@
                 <item row="0" column="2">
                  <layout class="QHBoxLayout" name="horizontalLayout_14">
                   <item>
-                   <widget class="QSpinBox" name="spinBoxPortionenEdit"/>
+                   <widget class="QSpinBox" name="sbServingsEdit"/>
                   </item>
                   <item>
                    <spacer name="horizontalSpacer_20">
@@ -1164,14 +1164,14 @@
                 <item row="1" column="2">
                  <layout class="QHBoxLayout" name="horizontalLayout_8">
                   <item>
-                   <widget class="QToolButton" name="buttonClearTags">
+                   <widget class="QToolButton" name="btnClearTags">
                     <property name="text">
                      <string>clear</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="labelTagsEdit">
+                   <widget class="QLabel" name="lblTagsEdit">
                     <property name="text">
                      <string>TextLabel</string>
                     </property>
@@ -1191,7 +1191,7 @@
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="comboBoxTags">
+                   <widget class="QComboBox" name="cbTags">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -1272,7 +1272,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QTextEdit" name="textEditBeschreibung">
+               <widget class="QTextEdit" name="teDescription">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
                   <horstretch>0</horstretch>
@@ -1333,7 +1333,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QTextEdit" name="textEditAnleitung"/>
+               <widget class="QTextEdit" name="teInstructions"/>
               </item>
               <item>
                <spacer name="verticalSpacer_16">

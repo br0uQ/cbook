@@ -18,7 +18,7 @@ from PyQt5.QtWidgets import QSizePolicy, QStyleOptionToolButton, QToolButton, QW
 # 
 # 
 #     def set_image(self, image_path):
-#         self.imageLabel.setPixmap(QPixmap(image_path))
+#         self.lblRecipeImage.setPixmap(QPixmap(image_path))
 
 class RecipeButton(QToolButton):
     def __init__(self):

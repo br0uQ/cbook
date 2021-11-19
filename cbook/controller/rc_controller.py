@@ -20,21 +20,21 @@ class RvController:
         # fill recipe data
         self.recipe = recipe
         recipe_dict = self.model.get_recipe_dict(recipe)
-        self.window.nameLabel.setText(self.model.get_name(recipe_dict))
+        self.window.lblRecipeName.setText(self.model.get_name(recipe_dict))
         self.window.set_image(self.get_fullimage_path(recipe))
 
         instructions = self.model.get_instructions(recipe_dict)
-        self.window.anleitungLabel.setText(self.get_instructions_string(instructions))
-        self.window.beschreibungLabel.setText(self.model.get_description(recipe_dict))
-        self.window.portionenSpinBox.setValue(self.model.get_servings(recipe_dict))
+        self.window.lblInstructions.setText(self.get_instructions_string(instructions))
+        self.window.lblDescription.setText(self.model.get_description(recipe_dict))
+        self.window.sbServings.setValue(self.model.get_servings(recipe_dict))
 
         # tags
         t = self.model.get_tags(recipe_dict)
-        self.window.tagsLabel.setText(t)
+        self.window.lblTags.setText(t)
 
         self.set_ingredients(self.model.get_ingredients(recipe_dict))
 
-        self.window.portionenSpinBox.valueChanged.connect(lambda: self.change_servings(recipe_dict))
+        self.window.sbServings.valueChanged.connect(lambda: self.change_servings(recipe_dict))
 
         # open recipe view
         self.window.stackedWidget.setCurrentIndex(1)
@@ -48,7 +48,7 @@ class RvController:
 
 
     def clear_ingredients(self):
-        grid = self.window.zutatenGrid
+        grid = self.window.lgIngredients
         for i in range(1, grid.rowCount()):
             item = grid.itemAtPosition(i, 0)
             if item:
@@ -63,7 +63,7 @@ class RvController:
 
     def set_ingredients(self, ingredients):
         self.clear_ingredients()
-        grid = self.window.zutatenGrid
+        grid = self.window.lgIngredients
         for x, i in enumerate(ingredients):
             if len(i.split(' ')) >= 3:
                 label = QLabel(i.split(' ')[0].replace(",", "."))
@@ -86,8 +86,8 @@ class RvController:
 
     def change_servings(self, recipe_dict):
         default_servings = self.model.get_servings(recipe_dict)
-        new_servings = self.window.portionenSpinBox.value()
-        grid = self.window.zutatenGrid
+        new_servings = self.window.sbServings.value()
+        grid = self.window.lgIngredients
         amounts = self.get_amounts(self.model.get_ingredients(recipe_dict))
         for i in range(1, len(amounts)):
             item = grid.itemAtPosition(i, 0)

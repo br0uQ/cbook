@@ -14,13 +14,13 @@ class ReController:
         self.model = model
         self.window = window
 
-        self.window.buttonAddIngredient.clicked.connect(self.add_ingredient_row)
-        self.window.buttonDeleteIngredient.clicked.connect(self.delete_ingredient_row)
-        self.window.loadImageButton.clicked.connect(self.open_select_image)
-        self.window.deleteImageButton.clicked.connect(self.delete_image)
-        self.window.comboBoxTags.activated.connect(self.activated_tags)
-        self.window.buttonClearTags.clicked.connect(self.clear_tags)
-        self.window.buttonReload.clicked.connect(self.reload)
+        self.window.btnAddIngredient.clicked.connect(self.add_ingredient_row)
+        self.window.btnDeleteIngredient.clicked.connect(self.delete_ingredient_row)
+        self.window.btnLoadImage.clicked.connect(self.open_select_image)
+        self.window.btnDeleteImage.clicked.connect(self.delete_image)
+        self.window.cbTags.activated.connect(self.activated_tags)
+        self.window.btnClearTags.clicked.connect(self.clear_tags)
+        self.window.btnReload.clicked.connect(self.reload)
 
 
     def reload(self):
@@ -29,30 +29,30 @@ class ReController:
 
     def set_image(self, image_path):
         pixmap = QPixmap(image_path)
-        self.window.imageLabelEdit.setPixmap(pixmap)
+        self.window.lblRecipeImageEdit.setPixmap(pixmap)
 
 
     def prepare_tags(self, tags):
-        self.window.comboBoxTags.clear()
-        self.window.comboBoxTags.addItems(tags)
+        self.window.cbTags.clear()
+        self.window.cbTags.addItems(tags)
 
 
     def prepare_new(self, tags):
         self.edit = False
         self.prepare_tags(tags)
-        self.window.nameLineEdit.setText("")
-        self.window.zutatenTableWidget.setRowCount(1)
-        self.window.zutatenTableWidget.clearContents()
+        self.window.leName.setText("")
+        self.window.twIngredients.setRowCount(1)
+        self.window.twIngredients.clearContents()
         self.set_image(self.window.get_default_meal_image_path())
-        self.window.spinBoxPortionenEdit.setValue(4)
-        self.window.buttonReload.setHidden(True)
+        self.window.sbServingsEdit.setValue(4)
+        self.window.btnReload.setHidden(True)
         self.clear_tags()
-        self.window.textEditAnleitung.setText("")
-        self.window.textEditBeschreibung.setText("")
+        self.window.teInstructions.setText("")
+        self.window.teDescription.setText("")
 
 
     def fill_ingredients_table(self, ingredients):
-        tableWidget = self.window.zutatenTableWidget
+        tableWidget = self.window.twIngredients
         tableWidget.setRowCount(len(ingredients))
         index = 0
         for i in ingredients:
@@ -78,17 +78,17 @@ class ReController:
 
     def fill_data(self, recipe):
         rd = self.model.get_recipe_dict(recipe)
-        self.window.nameLineEdit.setText(self.model.get_name(rd))
+        self.window.leName.setText(self.model.get_name(rd))
         self.set_image(os.path.dirname(recipe) + "/full.jpg")
-        self.window.spinBoxPortionenEdit.setValue(self.model.get_servings(rd))
+        self.window.sbServingsEdit.setValue(self.model.get_servings(rd))
         instructions = self.model.get_instructions(rd)
         text = ""
         for i in instructions:
             text = text + i + "\n\n"
-        self.window.textEditAnleitung.setText(text)
-        self.window.textEditBeschreibung.setText(self.model.get_description(rd))
+        self.window.teInstructions.setText(text)
+        self.window.teDescription.setText(self.model.get_description(rd))
         t = self.model.get_tags(rd)
-        self.window.labelTagsEdit.setText(t)
+        self.window.lblTagsEdit.setText(t)
         self.fill_ingredients_table(self.model.get_ingredients(rd))
 
 
@@ -100,12 +100,12 @@ class ReController:
 
 
     def add_ingredient_row(self):
-        tableWidget = self.window.zutatenTableWidget
+        tableWidget = self.window.twIngredients
         tableWidget.insertRow(tableWidget.rowCount())
 
 
     def delete_ingredient_row(self):
-        tableWidget = self.window.zutatenTableWidget
+        tableWidget = self.window.twIngredients
         tableWidget.removeRow(tableWidget.rowCount()-1)
 
 
@@ -125,25 +125,25 @@ class ReController:
 
 
     def activated_tags(self):
-        selected = self.window.comboBoxTags.currentText()
+        selected = self.window.cbTags.currentText()
         # add to list
-        text = self.window.labelTagsEdit.text()
+        text = self.window.lblTagsEdit.text()
         if selected not in text.split(','):
             if text != "":
                 text = text + ","
-            self.window.labelTagsEdit.setText(text + selected)
+            self.window.lblTagsEdit.setText(text + selected)
             # clear comboBox
-            self.window.comboBoxTags.clearEditText()
+            self.window.cbTags.clearEditText()
 
 
     def clear_tags(self):
-        self.window.labelTagsEdit.setText("")
+        self.window.lblTagsEdit.setText("")
 
 
     def get_ingredients(self):
         ingredients = []
-        model = self.window.zutatenTableWidget.model()
-        for r in range(0,self.window.zutatenTableWidget.rowCount()):
+        model = self.window.twIngredients.model()
+        for r in range(0,self.window.twIngredients.rowCount()):
             ingredient = []
             menge = model.data(model.index(r, 0))
             einheit = model.data(model.index(r, 1))
@@ -180,15 +180,15 @@ class ReController:
 
 
     def save_recipe(self):
-        name = self.window.nameLineEdit.text()
+        name = self.window.leName.text()
         if self.edit or self.model.check_name(name):
             ingredients = self.get_ingredients()
             if ingredients:
                 # read recipe data and save recipe
-                portionen = self.window.spinBoxPortionenEdit.value()
-                anleitung = self.window.textEditAnleitung.toPlainText()
-                beschreibung = self.window.textEditBeschreibung.toPlainText()
-                tags = self.window.labelTagsEdit.text()
+                portionen = self.window.sbServingsEdit.value()
+                anleitung = self.window.teInstructions.toPlainText()
+                beschreibung = self.window.teDescription.toPlainText()
+                tags = self.window.lblTagsEdit.text()
                 
                 self.model.save_recipe(name, self.image, ingredients, portionen,
                         beschreibung, anleitung, tags)

@@ -20,15 +20,15 @@ class MwController:
         self.rv_controller = RvController(model, window)
         self.re_controller = ReController(model, window)
 
-        self.window.recipeList.layout().addStretch()
+        self.window.lhRecipeList.layout().addStretch()
 
-        self.window.backButton.clicked.connect(self.open_recipe_list)
-        self.window.buttonCancel.clicked.connect(self.open_recipe_list)
-        self.window.buttonNeuesRezept.clicked.connect(self.create_new_recipe)
-        self.window.buttonSave.clicked.connect(self.save_recipe)
-        self.window.editButton.clicked.connect(self.edit_recipe)
-        self.window.toolButtonDelete.clicked.connect(self.open_confirmation_dialog)
-        self.window.toolButtonFolder.clicked.connect(self.change_folder)
+        self.window.btnBack.clicked.connect(self.open_recipe_list)
+        self.window.btnCancel.clicked.connect(self.open_recipe_list)
+        self.window.btnNewRecipe.clicked.connect(self.create_new_recipe)
+        self.window.btnSave.clicked.connect(self.save_recipe)
+        self.window.btnEdit.clicked.connect(self.edit_recipe)
+        self.window.btnDelete.clicked.connect(self.open_confirmation_dialog)
+        self.window.btnRecipeDir.clicked.connect(self.change_folder)
 
         self.check_recipe_path()
 
@@ -139,13 +139,13 @@ class MwController:
 
 
     def clear_checkboxes(self):
-        helper.clear_layout(self.window.tagsGroupBox.layout())
+        helper.clear_layout(self.window.gbTags.layout())
 
 
     def create_checkboxes(self):
         self.clear_checkboxes()
         for t in self.tags:
-            self.window.tagsGroupBox.layout().addWidget(self.create_checkbox(t))
+            self.window.gbTags.layout().addWidget(self.create_checkbox(t))
 
 
     def get_image_path(self, recipe_path):

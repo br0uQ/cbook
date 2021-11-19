@@ -24,24 +24,24 @@ class MainWindow(QMainWindow):
 
 
     def set_icons(self):
-        self.toolButtonDelete.setIcon(self.get_icon('edit-delete', QStyle.SP_TrashIcon))
-        self.editButton.setIcon(self.get_icon('edit', QStyle.SP_ArrowForward))
-        self.backButton.setIcon(self.get_icon('go-previous', QStyle.SP_ArrowBack))
-        self.buttonSave.setIcon(self.get_icon('document-save', QStyle.SP_DialogSaveButton))
-        self.buttonReload.setIcon(self.get_icon('edit-clear', QStyle.SP_BrowserReload))
-        self.buttonCancel.setIcon(self.get_icon('edit-clear-all', QStyle.SP_DialogCancelButton))
-        self.deleteImageButton.setIcon(self.get_icon('edit-delete', QStyle.SP_DialogDiscardButton))
-        self.buttonClearTags.setIcon(self.get_icon('edit-delete', QStyle.SP_DialogDiscardButton))
-        self.loadImageButton.setIcon(self.get_icon('document-open', QStyle.SP_FileDialogStart))
-        self.toolButtonFolder.setIcon(self.get_icon('folder', QStyle.SP_DirIcon))
-        self.buttonNeuesRezept.setIcon(self.get_icon('document-new', QStyle.SP_FileIcon))
-        self.buttonAddIngredient.setIcon(self.get_icon('list-add', QStyle.SP_ArrowDown))
-        self.buttonDeleteIngredient.setIcon(self.get_icon('list-remove', QStyle.SP_ArrowUp))
+        self.btnDelete.setIcon(self.get_icon('edit-delete', QStyle.SP_TrashIcon))
+        self.btnEdit.setIcon(self.get_icon('edit', QStyle.SP_ArrowForward))
+        self.btnBack.setIcon(self.get_icon('go-previous', QStyle.SP_ArrowBack))
+        self.btnSave.setIcon(self.get_icon('document-save', QStyle.SP_DialogSaveButton))
+        self.btnReload.setIcon(self.get_icon('edit-clear', QStyle.SP_BrowserReload))
+        self.btnCancel.setIcon(self.get_icon('edit-clear-all', QStyle.SP_DialogCancelButton))
+        self.btnDeleteImage.setIcon(self.get_icon('edit-delete', QStyle.SP_DialogDiscardButton))
+        self.btnClearTags.setIcon(self.get_icon('edit-delete', QStyle.SP_DialogDiscardButton))
+        self.btnLoadImage.setIcon(self.get_icon('document-open', QStyle.SP_FileDialogStart))
+        self.btnRecipeDir.setIcon(self.get_icon('folder', QStyle.SP_DirIcon))
+        self.btnNewRecipe.setIcon(self.get_icon('document-new', QStyle.SP_FileIcon))
+        self.btnAddIngredient.setIcon(self.get_icon('list-add', QStyle.SP_ArrowDown))
+        self.btnDeleteIngredient.setIcon(self.get_icon('list-remove', QStyle.SP_ArrowUp))
 
 
     def add_recipe(self, recipe_button):
         self.recipe_buttons.append(recipe_button)
-        layout = self.recipeList.layout()
+        layout = self.lhRecipeList.layout()
         layout.insertWidget(layout.count()-1,recipe_button)
 
 
@@ -50,16 +50,16 @@ class MainWindow(QMainWindow):
 
 
     def delete_recipe_buttons(self):
-        layout = self.recipeList.layout()
+        layout = self.lhRecipeList.layout()
         helper.clear_layout(layout)
         self.recipe_buttons.clear()
 
 
     def set_image(self, image_path):
         pixmap = QPixmap(image_path)
-        self.imageLabel.setPixmap(pixmap)
+        self.lblRecipeImage.setPixmap(pixmap)
 
-        self.imageLabel.resize(pixmap.width(),pixmap.height())
+        self.lblRecipeImage.resize(pixmap.width(),pixmap.height())
 
 
     def get_icon(self, theme_icon, fallback_icon):
