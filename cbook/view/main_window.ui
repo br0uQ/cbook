@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Cbook</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>cbook.svg</normaloff>cbook.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
