@@ -56,6 +56,8 @@ class MainWindow(QMainWindow):
 
 
     def set_image(self, image_path):
+        if not os.path.exists(image_path):
+            image_path = self.get_default_meal_image_path()
         pixmap = QPixmap(image_path)
         self.lblRecipeImage.setPixmap(pixmap)
 

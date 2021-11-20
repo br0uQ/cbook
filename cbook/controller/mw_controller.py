@@ -86,6 +86,8 @@ class MwController:
     def create_recipe_button(self, recipe, recipe_dict):
         name = self.model.get_name(recipe_dict)
         image_path = self.get_image_path(recipe)
+        if not os.path.exists(image_path):
+            image_path = self.window.get_default_meal_image_path()
         recipe_button = rb.RecipeButton()
         recipe_button.set_name(name)
         recipe_button.set_image(image_path)

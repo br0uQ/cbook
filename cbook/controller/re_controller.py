@@ -79,7 +79,10 @@ class ReController:
     def fill_data(self, recipe):
         rd = self.model.get_recipe_dict(recipe)
         self.window.leName.setText(self.model.get_name(rd))
-        self.set_image(os.path.dirname(recipe) + "/full.jpg")
+        image_path = os.path.dirname(recipe) + "/full.jpg"
+        if not os.path.exists(image_path):
+            image_path = self.window.get_default_meal_image_path()
+        self.set_image(image_path)
         self.window.sbServingsEdit.setValue(self.model.get_servings(rd))
         instructions = self.model.get_instructions(rd)
         text = ""
