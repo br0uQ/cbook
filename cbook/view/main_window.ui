@@ -54,7 +54,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_12">
         <item>
-         <widget class="QStackedWidget" name="stackedWidget">
+         <widget class="QStackedWidget" name="swRecipeViews">
           <property name="currentIndex">
            <number>0</number>
           </property>
@@ -1417,7 +1417,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QStackedWidget" name="stackedWidget_2">
+         <widget class="QStackedWidget" name="swMenuViews">
           <property name="currentIndex">
            <number>1</number>
           </property>
@@ -1439,7 +1439,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QToolButton" name="toolButton">
+               <widget class="QToolButton" name="btnMenuNew">
                 <property name="text">
                  <string>Neuer Speiseplan</string>
                 </property>
@@ -1504,6 +1504,51 @@
           <widget class="QWidget" name="menuedit">
            <layout class="QVBoxLayout" name="verticalLayout_16">
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_16">
+              <item>
+               <widget class="QToolButton" name="btnMenuEditAbort">
+                <property name="text">
+                 <string>Abbrechen</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_15">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QToolButton" name="toolButton_5">
+                <property name="text">
+                 <string>Einkaufsliste</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="toolButton_3">
+                <property name="text">
+                 <string>PDF erzeugen</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="toolButton_2">
+                <property name="text">
+                 <string>Speichern</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="QScrollArea" name="scrollArea_5">
               <property name="widgetResizable">
                <bool>true</bool>
@@ -1514,7 +1559,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>1552</width>
-                 <height>1299</height>
+                 <height>1265</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -1535,7 +1580,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <layout class="QHBoxLayout" name="horizontalLayout_17">
                   <item>
                    <widget class="QLabel" name="label">
                     <property name="font">
