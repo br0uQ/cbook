@@ -10,7 +10,7 @@ from os.path import split
 
 
 
-class MwController:
+class RecipesController:
     tag_filter = []
     tags = []
     
