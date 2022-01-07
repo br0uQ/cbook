@@ -37,7 +37,7 @@ class RvController:
         self.window.sbServings.valueChanged.connect(lambda: self.change_servings(recipe_dict))
 
         # open recipe view
-        self.window.stackedWidget.setCurrentIndex(1)
+        self.window.swRecipeViews.setCurrentIndex(1)
 
 
     def get_instructions_string(self, instructions):

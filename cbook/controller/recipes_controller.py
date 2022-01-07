@@ -174,26 +174,26 @@ class RecipesController:
     def delete_recipe(self):
         self.model.delete_recipe(self.recipe)
         self.window.delete_recipe_buttons()
-        self.window.stackedWidget.setCurrentIndex(0)
+        self.window.swRecipeViews.setCurrentIndex(0)
         self.load_recipes()
 
 
     def edit_recipe(self):
         self.re_controller.prepare_edit(self.recipe, self.tags)
-        self.window.stackedWidget.setCurrentIndex(2)
+        self.window.swRecipeViews.setCurrentIndex(2)
 
 
     def open_recipe_list(self):
-        self.window.stackedWidget.setCurrentIndex(0)
+        self.window.swRecipeViews.setCurrentIndex(0)
 
 
     def create_new_recipe(self):
         self.re_controller.prepare_new(self.tags)
-        self.window.stackedWidget.setCurrentIndex(2)
+        self.window.swRecipeViews.setCurrentIndex(2)
 
 
     def save_recipe(self):
         if self.re_controller.save_recipe():
             self.window.delete_recipe_buttons()
-            self.window.stackedWidget.setCurrentIndex(0)
+            self.window.swRecipeViews.setCurrentIndex(0)
             self.load_recipes()
