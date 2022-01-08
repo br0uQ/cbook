@@ -106,26 +106,36 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_4" columnstretch="0,0,0,0,0">
+     <item row="2" column="3">
+      <widget class="QLineEdit" name="leNameMain"/>
+     </item>
+     <item row="0" column="4">
+      <widget class="QLabel" name="label_105">
+       <property name="text">
+        <string>Nachspeise:</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="4">
       <widget class="QComboBox" name="cbRecipeDessert"/>
      </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="leNameStarter"/>
+     <item row="2" column="4">
+      <widget class="QLineEdit" name="leNameDessert"/>
+     </item>
+     <item row="1" column="3">
+      <widget class="QComboBox" name="cbRecipeMain"/>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="label_106">
+       <property name="text">
+        <string>Hauptspeise:</string>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_102">
        <property name="text">
         <string>Rezept:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QLineEdit" name="leNameMain"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_103">
-       <property name="text">
-        <string>Bezeichnung:</string>
        </property>
       </widget>
      </item>
@@ -139,25 +149,31 @@
      <item row="1" column="1">
       <widget class="QComboBox" name="cbRecipeStarter"/>
      </item>
-     <item row="1" column="3">
-      <widget class="QComboBox" name="cbRecipeMain"/>
-     </item>
-     <item row="0" column="4">
-      <widget class="QLabel" name="label_105">
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_103">
        <property name="text">
-        <string>Nachspeise:</string>
+        <string>Name:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
-      <widget class="QLabel" name="label_106">
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="leNameStarter"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Hauptspeise:</string>
+        <string>Beschreibung:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="4">
-      <widget class="QLineEdit" name="leNameDessert"/>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="leDescriptionStarter"/>
+     </item>
+     <item row="3" column="3">
+      <widget class="QLineEdit" name="leDescriptionMain"/>
+     </item>
+     <item row="3" column="4">
+      <widget class="QLineEdit" name="leDescriptionDessert"/>
      </item>
     </layout>
    </item>

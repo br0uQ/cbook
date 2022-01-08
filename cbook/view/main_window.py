@@ -43,10 +43,13 @@ class MainWindow(QMainWindow):
         widget = uic.loadUi(self.ui_weekday_file)
         if widget is not None:
             widget.lblWeekDay.setText(day)
+            widget.sbServings.setValue(4)
+            print("Todo: default portion size configuration")
             self.saMenuedit.layout().addWidget(widget)
         else:
             QtWidgets.QMessageBox.critical(self, "Error",
                     "Could not load weekday widget ui file.")
+        return widget
 
 
     def set_icons(self):
