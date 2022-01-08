@@ -2,7 +2,18 @@ from cbook.model import helper
 from PyQt5 import uic
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import QLabel, QMainWindow, QStyle, QToolButton
+from PyQt5 import QtWidgets
 import os, sys
+
+
+WEEKDAYS=[
+        "Montag",
+        "Dienstag",
+        "Mittwoch",
+        "Donnerstag",
+        "Freitag",
+        "Samstag",
+        "Sonntag"]
 
 
 def resource_path(relative_path):
@@ -21,6 +32,21 @@ class MainWindow(QMainWindow):
         ui_file = resource_path("main_window.ui")
         uic.loadUi(ui_file, self)
         self.set_icons()
+
+        # add weekday buttons
+        self.ui_weekday_file = resource_path("weekday_menuitem_widget.ui")
+        for d in WEEKDAYS:
+            self.add_wdw(d)
+
+
+    def add_wdw(self, day):
+        widget = uic.loadUi(self.ui_weekday_file)
+        if widget is not None:
+            widget.lblWeekDay.setText(day)
+            self.saMenuedit.layout().addWidget(widget)
+        else:
+            QtWidgets.QMessageBox.critical(self, "Error",
+                    "Could not load weekday widget ui file.")
 
 
     def set_icons(self):
