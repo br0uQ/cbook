@@ -202,7 +202,9 @@ class ReController:
                     if name != self.model.get_name(rd):
                         self.model.delete_recipe(self.recipe)
 
-            return True
+                return True
+            else:
+                return False
         else:
             QtWidgets.QMessageBox.critical(self.window, "Ungültiger Rezeptname",
                     "Ein Rezept mit diesem Namen ist bereits vorhanden.\n" +
